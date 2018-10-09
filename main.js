@@ -9,7 +9,14 @@ var unsupportedPlotDerivatives=[
   function laTeXed(expression){
  
     expression =   math.parse(expression)
-    return '$$'+expression.toTex({parenthesis: 'keep'}) + '$$'
+    var final =  '$$'+expression.toTex({parenthesis: 'keep'}) + '$$'
+    console.log(final)
+    return final
+  }
+  function LaTexDeriv(expression){
+    // var base = math.parse(expression.func)
+    var deriv = math.parse(expression.derivative)
+    return '$$\\frac{dn}{du}'+expression.func+'(x)='+deriv.toTex({parenthesis: 'keep'})+ '$$'
   }
 function toHuman(value){
   return math.format(value,14)
@@ -35,6 +42,8 @@ function getDerivative(originalFunction){
   MathJax.Hub.Queue(["Typeset",MathJax.Hub,document.getElementById('result-function')]);
   MathJax.Hub.Queue(["Typeset",MathJax.Hub,document.getElementById('result-function-simplified')]);
   MathJax.Hub.Queue(["Typeset",MathJax.Hub,document.getElementById('original-function-simplified')]);
+
+  MathJax.Hub.Queue(["Typeset",MathJax.Hub,document.getElementById('steps-function')]);
  
  
   }
@@ -64,11 +73,14 @@ ready(function(){
       document.getElementById('original-function-simplified').innerHTML= laTeXed(originalSimplified)
       
       for(var x=0;x<resultFunction.length;x++){
-
       var resultSimplified = math.format(math.simplify(resultFunction[x]))
         document.getElementById('result-function').innerHTML += laTeXed(resultFunction[x].replace(/ /g,''))
         document.getElementById('result-function-simplified').innerHTML += laTeXed(resultSimplified)
+      }
 
+      for(var x=0;x<rulesUsed.length;x++){
+        console.log(rulesUsed[x].derivative)
+        document.getElementById('steps-function').innerHTML += LaTexDeriv(rulesUsed[x])
       }
     fireMathJax();
     console.log(rulesUsed)

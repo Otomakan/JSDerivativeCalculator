@@ -42963,6 +42963,10 @@ function factory(type, config, load, typed) {
         case 'cbrt':
           // d/dx(cbrt(x)) = 1 / (3x^(2/3))
           console.log('d/dx(cbrt(x)) = 1 / (3x^(2/3))')
+          rulesUsed.push({
+            func:node.name,
+            derivative: '1 / (3x^(2/3))'
+          });
           div = true;
           funcDerivative = new OperatorNode('*', 'multiply', [createConstantNode(3), new OperatorNode('^', 'pow', [arg0, new OperatorNode('/', 'divide', [createConstantNode(2), createConstantNode(3)])])]);
           break;
@@ -42971,6 +42975,10 @@ function factory(type, config, load, typed) {
         case 'nthRoot':
           // d/dx(sqrt(x)) = 1 / (2*sqrt(x))
           console.log('d/dx(sqrt(x)) = 1 / (2*sqrt(x))')
+           rulesUsed.push({
+            func:node.name,
+            derivative: '1 / (2*sqrt(x)'
+          });
           if (node.args.length === 1) {
             div = true;
             funcDerivative = new OperatorNode('*', 'multiply', [createConstantNode(2), new FunctionNode('sqrt', [arg0])]);
@@ -42992,15 +43000,27 @@ function factory(type, config, load, typed) {
         case 'log':
           if (!arg1 && node.args.length === 1) {
             // d/dx(log(x)) = 1 / x
-            console.log('d/dx(log(x)) = 1 / x')
+          rulesUsed.push({
+            func:node.name,
+            derivative: '1 / x'
+          });
+          
             funcDerivative = arg0.clone();
             div = true;
           } else if (node.args.length === 1 && arg1 || node.args.length === 2 && constNodes[node.args[1]] !== undefined) {
             // d/dx(log(x, c)) = 1 / (x*ln(c))
+            rulesUsed.push({
+              func:node.name,
+              derivative: '1 / (x*ln(c))'
+            });
             funcDerivative = new OperatorNode('*', 'multiply', [arg0.clone(), new FunctionNode('log', [arg1 || node.args[1]])]);
             div = true;
           } else if (node.args.length === 2) {
             // d/dx(log(f(x), g(x))) = d/dx(log(f(x)) / log(g(x)))
+            rulesUsed.push({
+              func:node.name,
+              derivative: '\\frac{dn}{du}(log(f(x)) / log(g(x)))'
+            });
             return _derivative(new OperatorNode('/', 'divide', [new FunctionNode('log', [arg0]), new FunctionNode('log', [node.args[1]])]), constNodes);
           }
 
@@ -43009,7 +43029,7 @@ function factory(type, config, load, typed) {
         case 'exp':
           rulesUsed.push({
             func:node.name,
-            derivative: 'd/dx(e^x) = e^x'
+            derivative: 'e^x'
           });
           
           funcDerivative = new FunctionNode('exp', [arg0.clone()]);
@@ -43018,46 +43038,74 @@ function factory(type, config, load, typed) {
         case 'sin':
           rulesUsed.push({
             func:node.name,
-            derivative: 'dx(sin(x)) = cos(x)'
+            derivative: 'cos(x)'
           });
           funcDerivative = new FunctionNode('cos', [arg0.clone()]);
           break;
 
         case 'cos':
           // d/dx(cos(x)) = -sin(x)
+          rulesUsed.push({
+              func:node.name,
+              derivative: '-sin(x)'
+          });
           funcDerivative = new OperatorNode('-', 'unaryMinus', [new FunctionNode('sin', [arg0.clone()])]);
           break;
 
         case 'tan':
           // d/dx(tan(x)) = sec(x)^2
+          rulesUsed.push({
+              func:node.name,
+              derivative: 'sec(x)^2'
+          });
           funcDerivative = new OperatorNode('^', 'pow', [new FunctionNode('sec', [arg0.clone()]), createConstantNode(2)]);
           break;
 
         case 'sec':
           // d/dx(sec(x)) = sec(x)tan(x)
+          rulesUsed.push({
+              func:node.name,
+              derivative: 'sec(x)tan(x)'
+          });
           funcDerivative = new OperatorNode('*', 'multiply', [node, new FunctionNode('tan', [arg0.clone()])]);
           break;
 
         case 'csc':
           // d/dx(csc(x)) = -csc(x)cot(x)
+          rulesUsed.push({
+              func:node.name,
+              derivative: '-csc(x)cot(x)'
+          });
           negative = true;
           funcDerivative = new OperatorNode('*', 'multiply', [node, new FunctionNode('cot', [arg0.clone()])]);
           break;
 
         case 'cot':
           // d/dx(cot(x)) = -csc(x)^2
+          rulesUsed.push({
+              func:node.name,
+              derivative: '-csc(x)^2'
+          });
           negative = true;
           funcDerivative = new OperatorNode('^', 'pow', [new FunctionNode('csc', [arg0.clone()]), createConstantNode(2)]);
           break;
 
         case 'asin':
           // d/dx(asin(x)) = 1 / sqrt(1 - x^2)
+          rulesUsed.push({
+              func:node.name,
+              derivative: '1 / sqrt(1 - x^2)'
+          });
           div = true;
           funcDerivative = new FunctionNode('sqrt', [new OperatorNode('-', 'subtract', [createConstantNode(1), new OperatorNode('^', 'pow', [arg0.clone(), createConstantNode(2)])])]);
           break;
 
         case 'acos':
           // d/dx(acos(x)) = -1 / sqrt(1 - x^2)
+          rulesUsed.push({
+              func:node.name,
+              derivative: '-1 / sqrt(1 - x^2)'
+          });
           div = true;
           negative = true;
           funcDerivative = new FunctionNode('sqrt', [new OperatorNode('-', 'subtract', [createConstantNode(1), new OperatorNode('^', 'pow', [arg0.clone(), createConstantNode(2)])])]);
@@ -43065,18 +43113,30 @@ function factory(type, config, load, typed) {
 
         case 'atan':
           // d/dx(atan(x)) = 1 / (x^2 + 1)
+           rulesUsed.push({
+              func:node.name,
+              derivative: '1 / (x^2 + 1)'
+          });
           div = true;
           funcDerivative = new OperatorNode('+', 'add', [new OperatorNode('^', 'pow', [arg0.clone(), createConstantNode(2)]), createConstantNode(1)]);
           break;
 
         case 'asec':
           // d/dx(asec(x)) = 1 / (|x|*sqrt(x^2 - 1))
+           rulesUsed.push({
+              func:node.name,
+              derivative: '1 / (|x|*sqrt(x^2 - 1))'
+          });
           div = true;
           funcDerivative = new OperatorNode('*', 'multiply', [new FunctionNode('abs', [arg0.clone()]), new FunctionNode('sqrt', [new OperatorNode('-', 'subtract', [new OperatorNode('^', 'pow', [arg0.clone(), createConstantNode(2)]), createConstantNode(1)])])]);
           break;
 
         case 'acsc':
           // d/dx(acsc(x)) = -1 / (|x|*sqrt(x^2 - 1))
+          rulesUsed.push({
+              func:node.name,
+              derivative: '-1 / (|x|*sqrt(x^2 - 1))'
+          });
           div = true;
           negative = true;
           funcDerivative = new OperatorNode('*', 'multiply', [new FunctionNode('abs', [arg0.clone()]), new FunctionNode('sqrt', [new OperatorNode('-', 'subtract', [new OperatorNode('^', 'pow', [arg0.clone(), createConstantNode(2)]), createConstantNode(1)])])]);
@@ -43086,6 +43146,10 @@ function factory(type, config, load, typed) {
 
         case 'acot':
           // d/dx(acot(x)) = -1 / (x^2 + 1)
+          rulesUsed.push({
+              func:node.name,
+              derivative: '-1 / (x^2 + 1)'
+          });
           div = true;
           negative = true;
           funcDerivative = new OperatorNode('+', 'add', [new OperatorNode('^', 'pow', [arg0.clone(), createConstantNode(2)]), createConstantNode(1)]);
@@ -43096,6 +43160,10 @@ function factory(type, config, load, typed) {
         case 'ln':
           if (!arg1 && node.args.length === 1) {
             // d/dx(log(x)) = 1 / x
+            rulesUsed.push({
+              func:node.name,
+              derivative: '1 / x'
+            });
             funcDerivative = arg0.clone();
             div = true;
           } else if (node.args.length === 1 && arg1 || node.args.length === 2 && constNodes[node.args[1]] !== undefined) {
@@ -43114,7 +43182,10 @@ function factory(type, config, load, typed) {
           
           // 2*(e^-x^(2))/sqrt(x)
           // funcDerivative = new FunctionNode('exp', [arg0.clone()]);
-        console.log('bob')
+          rulesUsed.push({
+              func:node.name,
+              derivative: '2*(e^(-x^(2))/sqrt(pi)'
+            });
           funcDerivative = new OperatorNode('/', 'divide',
             //Top Division
             [new OperatorNode('*','multiply', 
@@ -43143,58 +43214,98 @@ function factory(type, config, load, typed) {
 
         case 'sinh':
           // d/dx(sinh(x)) = cosh(x)
+          rulesUsed.push({
+              func:node.name,
+              derivative: 'cosh(x)'
+            });
           console.log('sinh')
           funcDerivative = new FunctionNode('cosh', [arg0.clone()]);
           break;
 
         case 'cosh':
           // d/dx(cosh(x)) = sinh(x)
+          rulesUsed.push({
+              func:node.name,
+              derivative: 'sinh(x)'
+            });
           funcDerivative = new FunctionNode('sinh', [arg0.clone()]);
           break;
 
         case 'tanh':
           // d/dx(tanh(x)) = sech(x)^2
+           rulesUsed.push({
+              func:node.name,
+              derivative: 'sech(x)'
+            });
           funcDerivative = new OperatorNode('^', 'pow', [new FunctionNode('sech', [arg0.clone()]), createConstantNode(2)]);
           break;
 
         case 'sech':
           // d/dx(sech(x)) = -sech(x)tanh(x)
+         rulesUsed.push({
+            func:node.name,
+            derivative: '-sech(x)tanh(x)'
+          });
           negative = true;
           funcDerivative = new OperatorNode('*', 'multiply', [node, new FunctionNode('tanh', [arg0.clone()])]);
           break;
 
         case 'csch':
           // d/dx(csch(x)) = -csch(x)coth(x)
+         rulesUsed.push({
+            func:node.name,
+            derivative: '-csch(x)coth(x)'
+          });
           negative = true;
           funcDerivative = new OperatorNode('*', 'multiply', [node, new FunctionNode('coth', [arg0.clone()])]);
           break;
 
         case 'coth':
           // d/dx(coth(x)) = -csch(x)^2
+          rulesUsed.push({
+              func:node.name,
+              derivative: '-csch(x)^2'
+            });
           negative = true;
           funcDerivative = new OperatorNode('^', 'pow', [new FunctionNode('csch', [arg0.clone()]), createConstantNode(2)]);
           break;
 
         case 'asinh':
           // d/dx(asinh(x)) = 1 / sqrt(x^2 + 1)
+          rulesUsed.push({
+              func:node.name,
+              derivative: '1 / sqrt(x^2 + 1)'
+            });
           div = true;
           funcDerivative = new FunctionNode('sqrt', [new OperatorNode('+', 'add', [new OperatorNode('^', 'pow', [arg0.clone(), createConstantNode(2)]), createConstantNode(1)])]);
           break;
 
         case 'acosh':
           // d/dx(acosh(x)) = 1 / sqrt(x^2 - 1); XXX potentially only for x >= 1 (the real spectrum)
+           rulesUsed.push({
+              func:node.name,
+              derivative: '1 / sqrt(x^2 - 1)'
+            });
           div = true;
           funcDerivative = new FunctionNode('sqrt', [new OperatorNode('-', 'subtract', [new OperatorNode('^', 'pow', [arg0.clone(), createConstantNode(2)]), createConstantNode(1)])]);
           break;
 
         case 'atanh':
           // d/dx(atanh(x)) = 1 / (1 - x^2)
+          rulesUsed.push({
+              func:node.name,
+              derivative: '1 / (1 - x^2)'
+            });
           div = true;
           funcDerivative = new OperatorNode('-', 'subtract', [createConstantNode(1), new OperatorNode('^', 'pow', [arg0.clone(), createConstantNode(2)])]);
           break;
 
         case 'asech':
           // d/dx(asech(x)) = -1 / (x*sqrt(1 - x^2))
+           rulesUsed.push({
+              func:node.name,
+              derivative: '-1 / (x*sqrt(1 - x^2))'
+            });
           div = true;
           negative = true;
           funcDerivative = new OperatorNode('*', 'multiply', [arg0.clone(), new FunctionNode('sqrt', [new OperatorNode('-', 'subtract', [createConstantNode(1), new OperatorNode('^', 'pow', [arg0.clone(), createConstantNode(2)])])])]);
@@ -43202,6 +43313,10 @@ function factory(type, config, load, typed) {
 
         case 'acsch':
           // d/dx(acsch(x)) = -1 / (|x|*sqrt(x^2 + 1))
+          rulesUsed.push({
+              func:node.name,
+              derivative: '-1 / (|x|*sqrt(x^2 + 1))'
+            });
           div = true;
           negative = true;
           funcDerivative = new OperatorNode('*', 'multiply', [new FunctionNode('abs', [arg0.clone()]), new FunctionNode('sqrt', [new OperatorNode('+', 'add', [new OperatorNode('^', 'pow', [arg0.clone(), createConstantNode(2)]), createConstantNode(1)])])]);
@@ -43209,6 +43324,10 @@ function factory(type, config, load, typed) {
 
         case 'acoth':
           // d/dx(acoth(x)) = -1 / (1 - x^2)
+          rulesUsed.push({
+              func:node.name,
+              derivative: '-1 / (1 - x^2)'
+          });
           div = true;
           negative = true;
           funcDerivative = new OperatorNode('-', 'subtract', [createConstantNode(1), new OperatorNode('^', 'pow', [arg0.clone(), createConstantNode(2)])]);
@@ -43216,6 +43335,10 @@ function factory(type, config, load, typed) {
 
         case 'abs':
           // d/dx(abs(x)) = abs(x)/x
+          rulesUsed.push({
+              func:node.name,
+              derivative: 'abs(x)/x'
+          });
           funcDerivative = new OperatorNode('/', 'divide', [new FunctionNode(new SymbolNode('abs'), [arg0.clone()]), arg0.clone()]);
           break;
 
