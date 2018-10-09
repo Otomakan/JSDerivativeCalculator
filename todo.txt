@@ -1,0 +1,12 @@
+
+[]arsinh, 
+[]beta, 
+[]exp_integrat_si
+[] special root
+[] Create a parser for ln function
+[]refactor the check constants to enable more flexible 
+[] Bit of a problem when runing log(8,x) we get 2.0794415416798357 instead of ln(8)
+number of constants and custom values
+[] Take a look at the extra functions we have eg tanh
+[] fix x ^ (-1/3) the result is good not the plot, doesn't show negative values
+[ ] In Math.js from line 42963 there we can try to push the equations used to a global variable which we can then display then for the arithmetic part, we can use the soctic extension

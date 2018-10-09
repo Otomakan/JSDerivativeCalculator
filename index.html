@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  
+  <link rel="stylesheet" type="text/css" href="./main.css">
+  <script src="./main.js"></script>
+ <link href="https://fonts.googleapis.com/css?family=K2D|Raleway" rel="stylesheet"> <!-- Math.js -->
+  <script src="./math.js"></script>
+<!--   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.js"></script> -->
+<!--   <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script> -->
+    <!-- D3 and Function Plot -->
+       <script src="https://unpkg.com/d3@3/d3.min.js"></script>
+      <!-- <script src="https://unpkg.com/function-plot@1/dist/function-plot.js"></script> -->
+      <script type="text/javascript" src="functionplot.js"></script>
+   <!--  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/function-plot/1.18.1/function-plot.js"></script> -->
+   <!--  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script> -->
+<link rel="icon" href="https://www.google.co.jp/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwi1pPm1rO7dAhUBWLwKHXNFCHIQjRx6BAgBEAU&url=http%3A%2F%2Fwww.my-free-mobile-images.com%2Fimages%2F&psig=AOvVaw06jWKdhchN_szCa1RQYzvt&ust=1538796121037879">
+<!-- XCalc -->
+<script type="text/javascript" src='./XCalc.js'></script>
+<!-- MathJax -->
+<!-- <script type="text/javascript"
+   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_CHTML">
+</script> -->
+<!-- <script type="text/javascript" async src="./mathJax.jsTeX-MML-AM_CHTML" async></script> -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+</head>
+<header></header>
+<body>
+  <h1>JavaScript Calculator</h1>
+
+<div id="calculator" class="calculator">
+  <input id='main-input' type='text' placeholder="Enter equation here" /> <button id='go-button'> GO</button>
+
+</div>
+<div class="operators">
+
+  </div>
+ <div id='text-functions'>
+  <h4>Original Function</h4>
+  <div id='original-function'></div>
+  <h5>Simplified</h5>
+  <div id='original-function-simplified'></div>
+  <h4>Result Function</h4>
+  <div id='result-function'></div>
+  <h5>Simplified</h5>
+  <div id='result-function-simplified'></div>
+ </div>
+
+
+    <div id="quadratic"></div>
+  </div>
+<p>
+  When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+  $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+</p>
+<p>$$\sqrt{{ x}^{2}}$$</p>
+
+</body>

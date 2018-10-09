@@ -1,0 +1,34 @@
+There is a probelm when calculating sqrt(x^2) the plto look a bit weird
+When calculating tan(x) the plot library doesn't understand sec
+Still some problems with the latex parse
+ln(x) doesn't work
+
+ln and tan are fixed using the XCalc librairy, now the problem is creating custom log and square function
+
+Solved the tan problem by using both librairies, problem with XCalc is that it has ome weird results from time to time, so we will only use it in the case mathJS doesn't work
+
+Weird stuff happens if you don't put the parenthisis in properly.
+
+It was because I wrote -1(1/3x) instead of -(1/3*x)
+
+In the plto generator I modify the "a " and b value maybe create a way to modify it. 
+
+Problem with the plotter when using fraction powers(sqrt)
+graphType: 'polyline' seems to fix it pfiou
+
+Think about implementing a proper parse like nearly
+one extra feature is atan(x)
+
+Different results for ln(i):
+symbo= \ln \left(i\right)i^x
+
+Modified the Math.js librairy to deal with. So ow we can drop XCalc
+
+Dropping gamma function I think it's innacurate
+https://math.stackexchange.com/questions/1246766/derivative-of-the-gamma-function
+Problem with abs turning into ab2
+same for asec ad all the a family probly
+
+x ^ (-1/3) This doesn't work
+
+Line 43107 created a custom erf function, The problem is that it uses ln and pi which are converted to numbers
