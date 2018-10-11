@@ -6,8 +6,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   
-  <link rel="stylesheet" type="text/css" href="./main.css">
-  <script src="./main.js"></script>
+  <link rel="stylesheet" type="text/css" href="./main1.css">
+  <script src="./main1.js"></script>
  <link href="https://fonts.googleapis.com/css?family=K2D|Raleway" rel="stylesheet"> <!-- Math.js -->
   <script src="./math.js"></script>
 <!--   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.js"></script> -->
@@ -34,57 +34,48 @@
 </head>
 <header></header>
 <body>
+<div id='derivative-calculator-wrapper'>
   <h1>JavaScript Calculator</h1>
-<h1>Test MathJX</h1>
-<h2></h2>
-<div class="calculator">
-  <div class="input-wrapper">
-    <input id='main-input' class="math-input" type='text' placeholder="Enter equation here" /> 
-
-    <button id="go-button" class='btn btn-dark'> Calculate</button>
+  <h1>Test MathJX</h1>
+  <h2></h2>
+  <div class="calculator">
+    <div class="input-wrapper">
+      <input id='main-input' class="math-input" type='text' placeholder="Enter equation here" /> 
+      <div id="operators">    
+        <div>Del</div>  
+        <div>+</div>
+        <div>-</div>
+        <div>×</div>
+        <div>÷</div>
+        <div>√</div>
+        <div>^</div>
+        <div>(</div>
+        <div>)</div>
+      </div>
+      <button id="go-button" class='btn btn-dark'> Calculate</button>
+    </div>
   </div>
-  <div id="operators">    
-      <div>Del</div>  
-      <div>+</div>
-      <div>-</div>
-      <div>×</div>
-      <div>÷</div>
-      <div>√</div>
-      <div>^</div>
-      <div>(</div>
-      <div>)</div>
+
+  <button id="show-examples-button" class='btn btn-dark'> Show Examples</button>
+  <div id="examples"></div>
+
+      <div id="results">
+       <div id='text-functions'>
+          <h4>Original Function</h4>
+          <div id='original-function'></div>
+          <h5>Simplified</h5>
+          <div id='original-function-simplified'></div>
+          <h4>Differential Rules Used </h4>
+          <div id='steps-function'></div>
+          <h4>Chaining Rules Used</h4>
+          <div id='rules-used'></div>
+          <h4>Result Function</h4>
+          <div id='result-function'></div>
+          <h5>Simplified</h5>
+          <div id='result-function-simplified'></div>
+        </div>
+        <div id="quadratic"></div>
+      </div>
+    </div>  
   </div>
-
-</div>
-
-    <button id="show-examples-button" class='btn btn-dark'> Show Examples</button>
-<div id="examples"></div>
-
-  <div id="results">
-   <div id='text-functions'>
-    <h4>Original Function</h4>
-    <div id='original-function'></div>
-    <h5>Simplified</h5>
-    <div id='original-function-simplified'></div>
-    <h4>Differential Rules Used </h4>
-    <div id='steps-function'></div>
-    <h4>Chaining Rules Used</h4>
-    <div id='rules-used'></div>
-    <h4>Result Function</h4>
-    <div id='result-function'></div>
-    <h5>Simplified</h5>
-    <div id='result-function-simplified'></div>
-   </div>
-
-
-    <div id="quadratic"></div>
-    
- </div>
-  </div>  
-<p>
-  When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
-  $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
-</p>
-<p>$$\sqrt{{ x}^{2}}$$</p>
-
 </body>

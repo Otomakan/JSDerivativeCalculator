@@ -30,8 +30,7 @@ function getDerivative(originalFunction){
      // var tanReg = new RegExp('tan|gamma', 'g');
      // var lnReg = new RegExp('ln|acos', 'g');
      var result=[]
-
-    result.push(toHuman(math.derivative((math.parse(originalFunction)), 'x')))
+      result.push(toHuman(math.derivative((math.parse(originalFunction)), 'x')))
 
   return result
 }
@@ -79,17 +78,24 @@ ready(function(){
 
     //Maybe put this in an Onchange function that can translate it live
     originalFunction = inputFirstParser(originalFunction)
-      // Look for constants lie a or b because they break Xcal
+      // We try to see if the input is valid if not we will interpret the error
       try{
-
-    var originalSimplified = math.format(math.simplify(originalFunction))
-    console.log('succes')
+        var originalSimplified = math.format(math.simplify(originalFunction))
       }
-      catch(e){
-        console.log('noooo')
+      catch(err){
+        console.log('hmmm there was an error with your input')
+        if(err.match(/Uncaught SyntaxError: Parenthesis )/)){
+          console.log('there is a Parenthesis missing ')
+        }
+        throw err
       }
-    resultFunction = getDerivative(originalFunction);
-
+      try{
+      resultFunction = getDerivative(originalFunction);
+      }
+      catch(err){
+        console.log('oops it seems like there was a problem while calculating the derivative')
+        console.log(err)
+      }
     console.log(originalFunction)
     console.log(resultFunction)
       // Setting the HTML to show the results
@@ -171,13 +177,8 @@ ready(function(){
     derivationMethod = []
     resultFunction=[]
     rulesUsed=[]
-    try{
-      getInput()
-    }
-    catch{
-      console.log('error')
-    }
-    
+
+    getInput()
   }
 
 
