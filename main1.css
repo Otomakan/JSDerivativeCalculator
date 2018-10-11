@@ -140,6 +140,9 @@ h1 {
   padding:50px;
 }
 
+#derivative-calculator-errors{
+  color:red;
+}
 #graph-section{
   width:100vw;
 }

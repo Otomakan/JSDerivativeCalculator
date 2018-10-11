@@ -4,7 +4,7 @@ var valb = '2';
 var derivationMethod = [];
 var rulesUsed = [];
 var exampleList =["0.7x", "-1/3x", "x + 1", "x - 1", "-x", "x^2", "x / (x^2 + 1)", "a * (x^2 + b)", "x ^ (-1/3)", "e ^ (1 - x)", "sqrt(x)", "root(7, x + 1)", "ln(x)", "log(x, 8)", "abs(x)", "sin(x)", "cos(x)", "tan(x)", "arcsin(x)", "arccos(x)", "arctan(x)", "sec(x)", "sinh(x)", "arsinh(x)", "erf(x)", "beta(x, y)","e"];
-
+var errors=[]
 var unsupportedPlotDerivatives=[
 'ln', 'arccos', 'sec']
 // (function() {
@@ -79,31 +79,19 @@ ready(function(){
     //Maybe put this in an Onchange function that can translate it live
     originalFunction = inputFirstParser(originalFunction)
       // We try to see if the input is valid if not we will interpret the error
-      try{
-        var originalSimplified = math.format(math.simplify(originalFunction))
-      }
-      catch(err){
-        console.log('hmmm there was an error with your input')
-        if(err.match(/Uncaught SyntaxError: Parenthesis )/)){
-          console.log('there is a Parenthesis missing ')
-        }
-        throw err
-      }
-      try{
+     
+      var originalSimplified = math.format(math.simplify(originalFunction))
+     
       resultFunction = getDerivative(originalFunction);
-      }
-      catch(err){
-        console.log('oops it seems like there was a problem while calculating the derivative')
-        console.log(err)
-      }
-    console.log(originalFunction)
-    console.log(resultFunction)
+      
+      console.log(originalFunction)
+      console.log(resultFunction)
       // Setting the HTML to show the results
 
       document.getElementById('result-function').innerHTML ='';
       document.getElementById('original-function').innerHTML='';
-       document.getElementById('steps-function').innerHTML='';
-       document.getElementById('rules-used').innerHTML='';
+      document.getElementById('steps-function').innerHTML='';
+      document.getElementById('rules-used').innerHTML='';
 
       document.getElementById('original-function').innerHTML= laTeXed(originalFunction.replace(/ /g,''))
       document.getElementById('original-function-simplified').innerHTML= laTeXed(originalSimplified)
@@ -177,8 +165,31 @@ ready(function(){
     derivationMethod = []
     resultFunction=[]
     rulesUsed=[]
-
+    try{
     getInput()
+    }
+    //Catching potential errors and parsing some of them with Regex in order to have some nice rendering
+    catch(err){
+        var strE = err.toString()
+        console.log('hmmm there was an error with your input')
+        if(strE.match(/SyntaxError: Parenthesis/g)){
+          console.log("Parenthesis")
+          document.getElementById('derivative-calculator-errors').innerHTML= "It seems like there is a missing Parenthesis in your function."
+        }
+        if(strE.match(/SyntaxError: Unexpected end of expression/g)){
+          document.getElementById('derivative-calculator-errors').innerHTML= "It seems like your function ends up abruptly."
+        }
+        if(strE.match(/TypeError: Too few arguments in function/g)){
+          //
+          var pbErr= strE.match(/function+\s[a-z][a-z][a-z]/)[0].slice(9, strE.length-1)
+          document.getElementById('derivative-calculator-errors').innerHTML= "It seems like there is too few argument in the "+ pbErr " function."
+        }
+        else{
+          document.getElementById('derivative-calculator-errors').innerHTML=err.toString();
+        }
+        throw err
+    }
+    
   }
 
 
