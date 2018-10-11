@@ -12,4 +12,8 @@ number of constants and custom values
 [ ] In Math.js from line 42963 there we can try to push the equations used to a global variable which we can then display then for the arithmetic part, we can use the soctic extension
 [] Check if there will be some errors when parsi ng the complex logs (thought about it when implementing the latex converter)
 
-[] Test d/dx(log(f(x), g(x))) = d/dx(log(f(x)) / log(g(x))) @log line 430000
+[] Test d/dx(log(f(x), g(x))) = d/dx(log(f(x)) / log(g(x))) @log line 430000, Just remake all the lo stuff and maybe ln too
+[] put the firstParser in an onChange function so to dispay it live
+
+[] refactor operators in order to write it with Javascript (like examples), but maybe it will jiggity so think bout it)
+[]Fix show example transition

@@ -1,7 +1,10 @@
 
 var vala = '1';
 var valb = '2';
+var derivationMethod = [];
 var rulesUsed = [];
+var exampleList =["0.7x", "-1/3x", "x + 1", "x - 1", "-x", "x^2", "x / (x^2 + 1)", "a * (x^2 + b)", "a_1 * x + k_abc", "x ^ (-1/3)", "e ^ (1 - x)", "sqrt(x)", "root(7, x + 1)", "ln(x)", "log(x, 8)", "abs(x)", "sin(x)", "cos(x)", "tan(x)", "arcsin(x)", "arccos(x)", "arctan(x)", "sec(x)", "sinh(x)", "arsinh(x)", "erf(x)", "beta(x, y)", "gamma(x)", "expintegral_si(x)", "e", "pi", "i"];
+
 var unsupportedPlotDerivatives=[
 'ln', 'arccos', 'sec']
 // (function() {
@@ -44,6 +47,9 @@ function getDerivative(originalFunction){
   MathJax.Hub.Queue(["Typeset",MathJax.Hub,document.getElementById('original-function-simplified')]);
 
   MathJax.Hub.Queue(["Typeset",MathJax.Hub,document.getElementById('steps-function')]);
+
+  MathJax.Hub.Queue(["Typeset",MathJax.Hub,document.getElementById('rules-used')]);
+
  
  
   }
@@ -61,33 +67,85 @@ ready(function(){
 
   var inputEl = el("#main-input");// Equal button
   var goButton = el("#go-button");
-  var resultFunction = "";
+  var resultFunction = [];
   var originalFunction = ""
-  var getInput = function() {
-      originalFunction = inputEl.value
-      // Look for constants lie a or b because they break Xcal
+  var operators = document.getElementById('operators').querySelectorAll('div')
+  var examplesDiv = document.getElementById('examples');
 
+  var getInput = function() {
+
+      originalFunction = inputEl.value
+
+    //Maybe put this in an Onchange function that can translate it live
+    originalFunction = inputFirstParser(originalFunction)
+      // Look for constants lie a or b because they break Xcal
       var originalSimplified = math.format(math.simplify(originalFunction))
       resultFunction = getDerivative(originalFunction);
+
+    console.log(originalFunction)
+    console.log(resultFunction)
+      // Setting the HTML to show the results
+
+      document.getElementById('result-function').innerHTML ='';
+      document.getElementById('original-function').innerHTML='';
+       document.getElementById('steps-function').innerHTML='';
+       document.getElementById('rules-used').innerHTML='';
+
       document.getElementById('original-function').innerHTML= laTeXed(originalFunction.replace(/ /g,''))
       document.getElementById('original-function-simplified').innerHTML= laTeXed(originalSimplified)
       
-      for(var x=0;x<resultFunction.length;x++){
+      for(let x=0;x<resultFunction.length;x++){
       var resultSimplified = math.format(math.simplify(resultFunction[x]))
         document.getElementById('result-function').innerHTML += laTeXed(resultFunction[x].replace(/ /g,''))
         document.getElementById('result-function-simplified').innerHTML += laTeXed(resultSimplified)
       }
 
-      for(var x=0;x<rulesUsed.length;x++){
-        console.log(rulesUsed[x].derivative)
-        document.getElementById('steps-function').innerHTML += LaTexDeriv(rulesUsed[x])
+      for(let x=0;x<derivationMethod.length;x++){
+        console.log(derivationMethod[x].derivative)
+        document.getElementById('steps-function').innerHTML += LaTexDeriv(derivationMethod[x])
+      }
+      if(rulesUsed.length==0){
+         document.getElementById('rules-used').innerHTML = "No chaining rule used!"
+      }
+        for(let x=0;x<rulesUsed.length;x++){
+        document.getElementById('rules-used').innerHTML += rulesUsed[x]+'\n';
       }
     fireMathJax();
-    console.log(rulesUsed)
     generateGraph();
   }
+  //We use this function in order to put the sign in the input when clicked
+  for(var i=0;i<operators.length-1;i++){
+    operators[i].onclick = function(e){
+      if(this.innerHTML=="Del"){
+        document.getElementById('main-input').value = '';
+      }
+      else{
+        document.getElementById('main-input').value += this.innerHTML;
+      }
+    }
+  }
+  //Put the examples of the example list in the input
+  for (var i =0; i<exampleList.length-1;i++){
+
+    examplesDiv.innerHTML += "<div class='example' onclick=document.getElementById('main-input').value='"+exampleList[i].replace(/\s/g, "")+"'>"+exampleList[i]+"</div>";
+  }
+
+  document.getElementById('show-examples-button').onclick = function(){
+    if(examplesDiv.classList[0]=='show'){
+      examplesDiv.classList.remove("show");
+      this.innerHTML = "Show Examples"
+    }
+    else{
+      examplesDiv.classList.add("show");
+      this.innerHTML = "Hide Examples"
+    }
+  }
+
   
   goButton.onclick = function(){
+    derivationMethod = []
+    resultFunction=[]
+    rulesUsed=[]
     getInput()
   }
 
@@ -152,6 +210,39 @@ function ready(fn) {
   }
 }
 
+function inputFirstParser(expression, targets){
+  // targets [0] is the thing we watn to change, and target [1]is what we want to change it to
+  var targets = [
+    [/arccos/g,'acos'],[/arcsin/g,'asin'],[/arctan/g,'atan']
+  ]
+   var result=expression;
+   console.log(targets.length)
+  for(var i=0;i<targets.length;i++){
+      var match;
+      // if(result.match(targets[i][0])==null){
+      //   continue
+      // }
+      //We detect the matches and for each appearance we splice with our special splice function,
+       // cut by the length of the found and replace with target[1]
+      while (match= targets[i][0].exec(result)){
+        console.log(match)
+        // if(match.index==0){
+          result = result.splice(match.index,match[0].length,targets[i][1])
+        // }
+        // else if(match.index==result.length+1){
+        //   result = result.splice(match.index,match[0].length-1,targets[i][1])
+        // }
+        // else{
+        // result = result.splice(match.index+1,match[0].length-1,targets[i][1])
+        // }
+    }
+    console.log(result)
+   
+    }
+
+        console.log(result)
+     return result
+}
 //
 function checkReplaceConstants(expression, target,replacement){
   // The regs is an array of two array first one with the regex the second with the replace value bit (very) dirty at the moment probably create a function to generate the regex next

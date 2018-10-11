@@ -42963,7 +42963,7 @@ function factory(type, config, load, typed) {
         case 'cbrt':
           // d/dx(cbrt(x)) = 1 / (3x^(2/3))
           console.log('d/dx(cbrt(x)) = 1 / (3x^(2/3))')
-          rulesUsed.push({
+          derivationMethod.push({
             func:node.name,
             derivative: '1 / (3x^(2/3))'
           });
@@ -42975,9 +42975,9 @@ function factory(type, config, load, typed) {
         case 'nthRoot':
           // d/dx(sqrt(x)) = 1 / (2*sqrt(x))
           console.log('d/dx(sqrt(x)) = 1 / (2*sqrt(x))')
-           rulesUsed.push({
+           derivationMethod.push({
             func:node.name,
-            derivative: '1 / (2*sqrt(x)'
+            derivative: '1 / (2*sqrt(x))'
           });
           if (node.args.length === 1) {
             div = true;
@@ -43000,7 +43000,7 @@ function factory(type, config, load, typed) {
         case 'log':
           if (!arg1 && node.args.length === 1) {
             // d/dx(log(x)) = 1 / x
-          rulesUsed.push({
+          derivationMethod.push({
             func:node.name,
             derivative: '1 / x'
           });
@@ -43009,7 +43009,7 @@ function factory(type, config, load, typed) {
             div = true;
           } else if (node.args.length === 1 && arg1 || node.args.length === 2 && constNodes[node.args[1]] !== undefined) {
             // d/dx(log(x, c)) = 1 / (x*ln(c))
-            rulesUsed.push({
+            derivationMethod.push({
               func:node.name,
               derivative: '1 / (x*ln(c))'
             });
@@ -43017,7 +43017,7 @@ function factory(type, config, load, typed) {
             div = true;
           } else if (node.args.length === 2) {
             // d/dx(log(f(x), g(x))) = d/dx(log(f(x)) / log(g(x)))
-            rulesUsed.push({
+            derivationMethod.push({
               func:node.name,
               derivative: '\\frac{dn}{du}(log(f(x)) / log(g(x)))'
             });
@@ -43027,7 +43027,7 @@ function factory(type, config, load, typed) {
           break;
 
         case 'exp':
-          rulesUsed.push({
+          derivationMethod.push({
             func:node.name,
             derivative: 'e^x'
           });
@@ -43036,7 +43036,7 @@ function factory(type, config, load, typed) {
           break;
 
         case 'sin':
-          rulesUsed.push({
+          derivationMethod.push({
             func:node.name,
             derivative: 'cos(x)'
           });
@@ -43045,7 +43045,7 @@ function factory(type, config, load, typed) {
 
         case 'cos':
           // d/dx(cos(x)) = -sin(x)
-          rulesUsed.push({
+          derivationMethod.push({
               func:node.name,
               derivative: '-sin(x)'
           });
@@ -43054,7 +43054,7 @@ function factory(type, config, load, typed) {
 
         case 'tan':
           // d/dx(tan(x)) = sec(x)^2
-          rulesUsed.push({
+          derivationMethod.push({
               func:node.name,
               derivative: 'sec(x)^2'
           });
@@ -43063,7 +43063,7 @@ function factory(type, config, load, typed) {
 
         case 'sec':
           // d/dx(sec(x)) = sec(x)tan(x)
-          rulesUsed.push({
+          derivationMethod.push({
               func:node.name,
               derivative: 'sec(x)tan(x)'
           });
@@ -43072,7 +43072,7 @@ function factory(type, config, load, typed) {
 
         case 'csc':
           // d/dx(csc(x)) = -csc(x)cot(x)
-          rulesUsed.push({
+          derivationMethod.push({
               func:node.name,
               derivative: '-csc(x)cot(x)'
           });
@@ -43082,7 +43082,7 @@ function factory(type, config, load, typed) {
 
         case 'cot':
           // d/dx(cot(x)) = -csc(x)^2
-          rulesUsed.push({
+          derivationMethod.push({
               func:node.name,
               derivative: '-csc(x)^2'
           });
@@ -43092,7 +43092,7 @@ function factory(type, config, load, typed) {
 
         case 'asin':
           // d/dx(asin(x)) = 1 / sqrt(1 - x^2)
-          rulesUsed.push({
+          derivationMethod.push({
               func:node.name,
               derivative: '1 / sqrt(1 - x^2)'
           });
@@ -43102,7 +43102,7 @@ function factory(type, config, load, typed) {
 
         case 'acos':
           // d/dx(acos(x)) = -1 / sqrt(1 - x^2)
-          rulesUsed.push({
+          derivationMethod.push({
               func:node.name,
               derivative: '-1 / sqrt(1 - x^2)'
           });
@@ -43113,7 +43113,7 @@ function factory(type, config, load, typed) {
 
         case 'atan':
           // d/dx(atan(x)) = 1 / (x^2 + 1)
-           rulesUsed.push({
+           derivationMethod.push({
               func:node.name,
               derivative: '1 / (x^2 + 1)'
           });
@@ -43123,7 +43123,7 @@ function factory(type, config, load, typed) {
 
         case 'asec':
           // d/dx(asec(x)) = 1 / (|x|*sqrt(x^2 - 1))
-           rulesUsed.push({
+           derivationMethod.push({
               func:node.name,
               derivative: '1 / (|x|*sqrt(x^2 - 1))'
           });
@@ -43133,7 +43133,7 @@ function factory(type, config, load, typed) {
 
         case 'acsc':
           // d/dx(acsc(x)) = -1 / (|x|*sqrt(x^2 - 1))
-          rulesUsed.push({
+          derivationMethod.push({
               func:node.name,
               derivative: '-1 / (|x|*sqrt(x^2 - 1))'
           });
@@ -43146,7 +43146,7 @@ function factory(type, config, load, typed) {
 
         case 'acot':
           // d/dx(acot(x)) = -1 / (x^2 + 1)
-          rulesUsed.push({
+          derivationMethod.push({
               func:node.name,
               derivative: '-1 / (x^2 + 1)'
           });
@@ -43160,7 +43160,7 @@ function factory(type, config, load, typed) {
         case 'ln':
           if (!arg1 && node.args.length === 1) {
             // d/dx(log(x)) = 1 / x
-            rulesUsed.push({
+            derivationMethod.push({
               func:node.name,
               derivative: '1 / x'
             });
@@ -43182,7 +43182,7 @@ function factory(type, config, load, typed) {
           
           // 2*(e^-x^(2))/sqrt(x)
           // funcDerivative = new FunctionNode('exp', [arg0.clone()]);
-          rulesUsed.push({
+          derivationMethod.push({
               func:node.name,
               derivative: '2*(e^(-x^(2))/sqrt(pi)'
             });
@@ -43208,23 +43208,21 @@ function factory(type, config, load, typed) {
             //Bottom Division
             new FunctionNode('sqrt',[createConstantNode(3.14)])
             ]);
-        console.log(funcDerivative)
           break;
           //End Added By me
 
         case 'sinh':
           // d/dx(sinh(x)) = cosh(x)
-          rulesUsed.push({
+          derivationMethod.push({
               func:node.name,
               derivative: 'cosh(x)'
             });
-          console.log('sinh')
           funcDerivative = new FunctionNode('cosh', [arg0.clone()]);
           break;
 
         case 'cosh':
           // d/dx(cosh(x)) = sinh(x)
-          rulesUsed.push({
+          derivationMethod.push({
               func:node.name,
               derivative: 'sinh(x)'
             });
@@ -43233,7 +43231,7 @@ function factory(type, config, load, typed) {
 
         case 'tanh':
           // d/dx(tanh(x)) = sech(x)^2
-           rulesUsed.push({
+           derivationMethod.push({
               func:node.name,
               derivative: 'sech(x)'
             });
@@ -43242,7 +43240,7 @@ function factory(type, config, load, typed) {
 
         case 'sech':
           // d/dx(sech(x)) = -sech(x)tanh(x)
-         rulesUsed.push({
+         derivationMethod.push({
             func:node.name,
             derivative: '-sech(x)tanh(x)'
           });
@@ -43252,7 +43250,7 @@ function factory(type, config, load, typed) {
 
         case 'csch':
           // d/dx(csch(x)) = -csch(x)coth(x)
-         rulesUsed.push({
+         derivationMethod.push({
             func:node.name,
             derivative: '-csch(x)coth(x)'
           });
@@ -43262,7 +43260,7 @@ function factory(type, config, load, typed) {
 
         case 'coth':
           // d/dx(coth(x)) = -csch(x)^2
-          rulesUsed.push({
+          derivationMethod.push({
               func:node.name,
               derivative: '-csch(x)^2'
             });
@@ -43272,7 +43270,7 @@ function factory(type, config, load, typed) {
 
         case 'asinh':
           // d/dx(asinh(x)) = 1 / sqrt(x^2 + 1)
-          rulesUsed.push({
+          derivationMethod.push({
               func:node.name,
               derivative: '1 / sqrt(x^2 + 1)'
             });
@@ -43282,7 +43280,7 @@ function factory(type, config, load, typed) {
 
         case 'acosh':
           // d/dx(acosh(x)) = 1 / sqrt(x^2 - 1); XXX potentially only for x >= 1 (the real spectrum)
-           rulesUsed.push({
+           derivationMethod.push({
               func:node.name,
               derivative: '1 / sqrt(x^2 - 1)'
             });
@@ -43292,7 +43290,7 @@ function factory(type, config, load, typed) {
 
         case 'atanh':
           // d/dx(atanh(x)) = 1 / (1 - x^2)
-          rulesUsed.push({
+          derivationMethod.push({
               func:node.name,
               derivative: '1 / (1 - x^2)'
             });
@@ -43302,7 +43300,7 @@ function factory(type, config, load, typed) {
 
         case 'asech':
           // d/dx(asech(x)) = -1 / (x*sqrt(1 - x^2))
-           rulesUsed.push({
+           derivationMethod.push({
               func:node.name,
               derivative: '-1 / (x*sqrt(1 - x^2))'
             });
@@ -43313,7 +43311,7 @@ function factory(type, config, load, typed) {
 
         case 'acsch':
           // d/dx(acsch(x)) = -1 / (|x|*sqrt(x^2 + 1))
-          rulesUsed.push({
+          derivationMethod.push({
               func:node.name,
               derivative: '-1 / (|x|*sqrt(x^2 + 1))'
             });
@@ -43324,7 +43322,7 @@ function factory(type, config, load, typed) {
 
         case 'acoth':
           // d/dx(acoth(x)) = -1 / (1 - x^2)
-          rulesUsed.push({
+          derivationMethod.push({
               func:node.name,
               derivative: '-1 / (1 - x^2)'
           });
@@ -43335,7 +43333,7 @@ function factory(type, config, load, typed) {
 
         case 'abs':
           // d/dx(abs(x)) = abs(x)/x
-          rulesUsed.push({
+          derivationMethod.push({
               func:node.name,
               derivative: 'abs(x)/x'
           });
@@ -43361,8 +43359,12 @@ function factory(type, config, load, typed) {
          F(x)  = f(g(x))
          F'(x) = g'(x)*f'(g(x)) */
 
-
       var chainDerivative = _derivative(arg0, constNodes);
+      // console.log()
+      if(arg0.args){
+        rulesUsed.push('Applying the chain rule from '+node.name+' to '+arg0.fn);
+      }
+      
 
       if (negative) {
         chainDerivative = new OperatorNode('-', 'unaryMinus', [chainDerivative]);
