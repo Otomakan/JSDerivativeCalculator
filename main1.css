@@ -65,6 +65,13 @@ h1 {
   outline: 1px solid black;
   /*border-width:  2px;*/
 }
+.math-input.not-ready{
+  outline:1px solid red;
+}
+#input-first-helper{
+  color:red;  
+  position: absolute;
+}
 #operators{
   display: flex;
   flex-wrap: wrap;

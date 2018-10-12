@@ -1,13 +1,117 @@
 
-var vala = '1';
-var valb = '2';
-var derivationMethod = [];
+
+//We are exeecptionaly making derivationMethods  and rulesUsed  global variables because we are accessing it in math.js
+ var derivationMethod = [];
 var rulesUsed = [];
-var exampleList =["0.7x", "-1/3x", "x + 1", "x - 1", "-x", "x^2", "x / (x^2 + 1)", "a * (x^2 + b)", "x ^ (-1/3)", "e ^ (1 - x)", "sqrt(x)", "root(7, x + 1)", "ln(x)", "log(x, 8)", "abs(x)", "sin(x)", "cos(x)", "tan(x)", "arcsin(x)", "arccos(x)", "arctan(x)", "sec(x)", "sinh(x)", "arsinh(x)", "erf(x)", "beta(x, y)","e"];
-var errors=[]
-var unsupportedPlotDerivatives=[
-'ln', 'arccos', 'sec']
-// (function() {
+ready(function(){
+
+  var resultFunction = "";
+  var originalFunction = "";
+  // Variables
+  var goButton = document.getElementById("go-button");
+  var vala = '1';
+  var valb = '2';
+  var exampleList =["0.7x", "-1/3x", "x + 1", "x - 1", "-x", "x^2", "x / (x^2 + 1)", "a * (x^2 + b)", "x ^ (-1/3)", "e ^ (1 - x)", "sqrt(x)", "root(7, x + 1)", "ln(x)", "log(x, 8)", "abs(x)", "sin(x)", "cos(x)", "tan(x)", "arcsin(x)", "arccos(x)", "arctan(x)", "sec(x)", "sinh(x)", "arsinh(x)", "erf(x)", "beta(x, y)","e"];
+  var errors=[]
+
+  var operators = document.getElementById('operators').querySelectorAll('div')
+  var examplesDiv = document.getElementById('examples');
+
+  //We use this function in order to put the sign in the input when clicked
+  for(var i=0;i<operators.length-1;i++){
+    operators[i].onclick = function(e){
+      if(this.innerHTML=="Del"){
+        document.getElementById('main-input').value = '';
+      }
+      else{
+        document.getElementById('main-input').value += this.innerHTML;
+      }
+    }
+  }
+  //Put the examples from the example list into the input field
+  for (var i =0; i<exampleList.length-1;i++){
+    var onClickString = "document.getElementById('main-input').value='"+exampleList[i].replace(/\s/g, "")+"';"+
+    "document.getElementById('original-function').innerHTML=laTeXed('"+exampleList[i].replace(/ /g,'')+"');"+
+    "MathJax.Hub.Queue(['Typeset',MathJax.Hub,document.getElementById('original-function')]);"
+    examplesDiv.innerHTML += "<div id='ex"+i+"' onclick="+onClickString+" class='example'>"+exampleList[i]+"</div>";
+    //Adds the example in the result section
+    document.getElementById('ex'+i).onclick=function(){
+    console.log(this)
+    document.getElementById('main-input').value+=this.innerHTML.replace(/\s/g, "");
+    document.getElementById('original-function').innerHTML= laTeXed(this.innerHTML.replace(/ /g,''))
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub,document.getElementById('original-function')]);
+    }
+  }
+
+  document.getElementById('show-examples-button').onclick = function(){
+    if(examplesDiv.classList[0]=='show'){
+      examplesDiv.classList.remove("show");
+      this.innerHTML = "Show Examples"
+    }
+    else{
+      examplesDiv.classList.add("show");
+      this.innerHTML = "Hide Examples"
+    }
+  }
+  //End 'show-examples-button').onclick
+
+  //Listen to Changes to the input
+  var mainInput =  document.getElementById('main-input')
+  mainInput.addEventListener('input', function(e){
+    mainInput.innerHTML = this.value.toLowerCase()
+  var helper = document.getElementById('input-first-helper')
+    try{
+      helper.innerHTML = "";
+     document.getElementById('original-function').innerHTML= laTeXed(this.value.replace(/ /g,'')); 
+     mainInput.classList.remove('not-ready');
+    }
+    catch(err){
+      mainInput.classList.add('not-ready');
+      var coordinates = mainInput.getBoundingClientRect();
+      
+      helper.style.cssText = "top:"+(coordinates.y-20)+"px;left:"+coordinates.x+"px;";
+      helper.innerHTML= parseErrorType(err.toString());
+    }
+
+      MathJax.Hub.Queue(["Typeset",MathJax.Hub,document.getElementById('original-function')]);
+  })
+
+  //Calculate the derivative after the Calculate Button is clicked
+  goButton.onclick = function(){
+    derivationMethod = [];
+    resultFunction="";
+    rulesUsed=[];
+    try{
+      getInput(originalFunction,resultFunction,vala,valb);
+    }
+    //Catching potential errors and parsing some of them with Regex in order to have some nice rendering
+    catch(err){
+        console.log('hmmm there was an error with your input')
+        errMessage = parseErrorType(err.toString());
+         document.getElementById('derivative-calculator-errors').innerHTML= errMessage
+        throw err
+    } 
+  }
+  //End goButton.onclick
+
+})
+
+var getInput = function(vala,valb) {
+
+  var inputEl = document.getElementById("main-input");// Equal button
+  var originalFunction = inputEl.value
+  originalFunction = inputFirstParser(originalFunction)
+
+    // We try to see if the input is valid if not we will interpret the error
+  var resultFunction = getDerivative(originalFunction);
+
+  console.log(originalFunction)
+  console.log(resultFunction)
+  // Setting the HTML to show the results
+  setResultHTML(originalFunction, resultFunction);
+  fireMathJax();
+  generateGraph(originalFunction,resultFunction,vala,valb);
+}
   //Parser Convert to human language
   function laTeXed(expression){
  
@@ -27,12 +131,8 @@ function toHuman(value){
 
 
 function getDerivative(originalFunction){
-     // var tanReg = new RegExp('tan|gamma', 'g');
-     // var lnReg = new RegExp('ln|acos', 'g');
-     var result=[]
-      result.push(toHuman(math.derivative((math.parse(originalFunction)), 'x')))
-
-  return result
+  console.log(math.parse(originalFunction))
+  return toHuman(math.derivative((math.parse(originalFunction)), 'x'))
 }
   //Fire MathJax
   var fireMathJax=function(){
@@ -53,192 +153,7 @@ function getDerivative(originalFunction){
  
  
   }
-  // "use strict";
-ready(function(){
-// Shortcut to get elements
-  var el = function(element) {
-    if (element.charAt(0) === "#") { // If passed an ID...
-      return document.querySelector(element); // ... returns single element
-    }
 
-    return document.querySelectorAll(element); // Otherwise, returns a nodelist
-  };
-  // Variables
-
-  var inputEl = el("#main-input");// Equal button
-  var goButton = el("#go-button");
-  var resultFunction = [];
-  var originalFunction = ""
-  var operators = document.getElementById('operators').querySelectorAll('div')
-  var examplesDiv = document.getElementById('examples');
-
-  var getInput = function() {
-
-    originalFunction = inputEl.value
-
-    //Maybe put this in an Onchange function that can translate it live
-    originalFunction = inputFirstParser(originalFunction)
-      // We try to see if the input is valid if not we will interpret the error
-     
-      var originalSimplified = math.format(math.simplify(originalFunction))
-     
-      resultFunction = getDerivative(originalFunction);
-      
-      console.log(originalFunction)
-      console.log(resultFunction)
-      // Setting the HTML to show the results
-
-      document.getElementById('result-function').innerHTML ='';
-      document.getElementById('original-function').innerHTML='';
-      document.getElementById('steps-function').innerHTML='';
-      document.getElementById('rules-used').innerHTML='';
-
-      document.getElementById('original-function').innerHTML= laTeXed(originalFunction.replace(/ /g,''))
-      document.getElementById('original-function-simplified').innerHTML= laTeXed(originalSimplified)
-      
-      for(let x=0;x<resultFunction.length;x++){
-      var resultSimplified = math.format(math.simplify(resultFunction[x]))
-        document.getElementById('result-function').innerHTML += laTeXed(resultFunction[x].replace(/ /g,''))
-        document.getElementById('result-function-simplified').innerHTML += laTeXed(resultSimplified)
-      }
-
-      for(let x=0;x<derivationMethod.length;x++){
-        console.log(derivationMethod[x].derivative)
-        document.getElementById('steps-function').innerHTML += LaTexDeriv(derivationMethod[x])
-      }
-      if(rulesUsed.length==0){
-         document.getElementById('rules-used').innerHTML = "No chaining rule used!"
-      }
-        for(let x=0;x<rulesUsed.length;x++){
-        document.getElementById('rules-used').innerHTML += rulesUsed[x]+'\n';
-      }
-    fireMathJax();
-    generateGraph();
-  }
-  //We use this function in order to put the sign in the input when clicked
-  for(var i=0;i<operators.length-1;i++){
-    operators[i].onclick = function(e){
-      if(this.innerHTML=="Del"){
-        document.getElementById('main-input').value = '';
-      }
-      else{
-        document.getElementById('main-input').value += this.innerHTML;
-      }
-    }
-  }
-  //Put the examples of the example list in the input field
-  for (var i =0; i<exampleList.length-1;i++){
-
-
-        var onClickString = "document.getElementById('main-input').value='"+exampleList[i].replace(/\s/g, "")+"';"+
-        "document.getElementById('original-function').innerHTML=laTeXed('"+exampleList[i].replace(/ /g,'')+"');"+
-        "MathJax.Hub.Queue(['Typeset',MathJax.Hub,document.getElementById('original-function')]);"
-    examplesDiv.innerHTML += "<div id='ex"+i+"' onclick="+onClickString+" class='example'>"+exampleList[i]+"</div>";
-    //Adds the example in the result section
-      document.getElementById('ex'+i).onclick=function(){
-        console.log(this)
-        document.getElementById('main-input').value+=this.innerHTML.replace(/\s/g, "");
-        document.getElementById('original-function').innerHTML= laTeXed(this.innerHTML.replace(/ /g,''))
-        MathJax.Hub.Queue(["Typeset",MathJax.Hub,document.getElementById('original-function')]);
-    }
-  }
-
-  document.getElementById('show-examples-button').onclick = function(){
-    if(examplesDiv.classList[0]=='show'){
-      examplesDiv.classList.remove("show");
-      this.innerHTML = "Show Examples"
-    }
-    else{
-      examplesDiv.classList.add("show");
-      this.innerHTML = "Hide Examples"
-    }
-  }
-
-  //Listen to Changes to the input
-  document.getElementById('main-input').addEventListener('input', function(e){
-    document.getElementById('original-function').innerHTML= laTeXed(this.value.replace(/ /g,''));
-    MathJax.Hub.Queue(["Typeset",MathJax.Hub,document.getElementById('original-function')]);
-  })
-
-  //Calculate the derivative after the Calculate Button is clicked
-  goButton.onclick = function(){
-    derivationMethod = []
-    resultFunction=[]
-    rulesUsed=[]
-    try{
-    getInput()
-    }
-    //Catching potential errors and parsing some of them with Regex in order to have some nice rendering
-    catch(err){
-        var strE = err.toString()
-        console.log('hmmm there was an error with your input')
-        if(strE.match(/SyntaxError: Parenthesis/g)){
-          console.log("Parenthesis")
-          document.getElementById('derivative-calculator-errors').innerHTML= "It seems like there is a missing Parenthesis in your function."
-        }
-        if(strE.match(/SyntaxError: Unexpected end of expression/g)){
-          document.getElementById('derivative-calculator-errors').innerHTML= "It seems like your function ends up abruptly."
-        }
-        if(strE.match(/TypeError: Too few arguments in function/g)){
-          //
-          var pbErr= strE.match(/function+\s[a-z][a-z][a-z]/)[0].slice(9, strE.length-1)
-          document.getElementById('derivative-calculator-errors').innerHTML= "It seems like there is too few argument in the "+ pbErr " function."
-        }
-        else{
-          document.getElementById('derivative-calculator-errors').innerHTML=err.toString();
-        }
-        throw err
-    }
-    
-  }
-
-
-
-// Graph function
-// Graph Plotting Section
-  var generateGraph = function(){
-    //Detect if there is a a or b constant and if so replace it with val a or valb in order to plot
-
-    var resultGraphF=checkReplaceConstants(resultFunction[0])
-    var originalGraphF = checkReplaceConstants(originalFunction)
-   
-    // resultGraphF=checkReplaceConstants(resultGraphF)
-    // originalGraphF = checkReplaceConstants(originalGraphF)
-   resultGraphF=lnParser(resultGraphF)
-    originalGraphF = lnParser(originalGraphF)
-   
-   // The plotting tool is a bid dumb so we have to do some transformations sometimes
-    var forbidReg = new RegExp("ln","g");
-   if(originalGraphF.match(forbidReg)){
-    console.log('found')
-      originalGraphF = XCalc.createExpression(originalGraphF).formula()
-    }
-    console.log(resultGraphF)
-    console.log(originalGraphF)
-      functionPlot({
-      target: '#quadratic',
-      data: [
-      {
-          fn: resultGraphF,
-          graphType: 'polyline',
-          color:'red',
-          range:[-10,10],
-          nSamples: 1000
-          },
-          {
-          fn: originalGraphF,
-          graphType: 'polyline',
-          color:'black',
-          updateOnMouseMove:true
-          }
-        
-      ],
-      })
-  }
-
-
-})
-  
 //Thanks to http://youmightnotneedjquery.com/#ready
 function ready(fn) {
   if (document.readyState != 'loading') {
@@ -287,7 +202,7 @@ function inputFirstParser(expression, targets){
      return result
 }
 //
-function checkReplaceConstants(expression, target,replacement){
+function checkReplaceConstants(expression, target,replacement,vala,valb){
   // The regs is an array of two array first one with the regex the second with the replace value bit (very) dirty at the moment probably create a function to generate the regex next
    var regs=[
     [/([@\s#\$%\^\&\+\=\*\(\)\^\/\-](a)[@\s#\$%\^\&\+\=\*\(\)\^\/\-])|(^(a)[@\s#\$%\^\&\+\=\*\(\)\^\/\-])|([@\s#\$%\^\&\+\=\*\(\)\^\/\-](a)$)/g,
@@ -376,7 +291,97 @@ function findMatchParenthesisPos(expression,start){
   }
   return -1
 }
+// Graph function
+// Graph Plotting Section
+  var generateGraph = function(originalFunction,resultFunction,vala,valb){
+    //Detect if there is a a or b constant and if so replace it with val a or valb in order to plot
 
+    var resultGraphF=checkReplaceConstants(resultFunction,vala,valb)
+    var originalGraphF = checkReplaceConstants(originalFunction)
+   
+    // resultGraphF=checkReplaceConstants(resultGraphF)
+    // originalGraphF = checkReplaceConstants(originalGraphF)
+   resultGraphF=lnParser(resultGraphF)
+    originalGraphF = lnParser(originalGraphF)
+   
+   // The plotting tool is a bid dumb so we have to do some transformations sometimes
+    var forbidReg = new RegExp("ln","g");
+   if(originalGraphF.match(forbidReg)){
+    console.log('found')
+      originalGraphF = XCalc.createExpression(originalGraphF).formula()
+    }
+    console.log(resultGraphF)
+    console.log(originalGraphF)
+      functionPlot({
+      target: '#quadratic',
+      data: [
+      {
+          fn: resultGraphF,
+          graphType: 'polyline',
+          color:'red',
+          range:[-10,10],
+          nSamples: 1000
+          },
+          {
+          fn: originalGraphF,
+          graphType: 'polyline',
+          color:'black',
+          updateOnMouseMove:true
+          }
+        
+      ],
+      })
+  }
+
+var setResultHTML = function(originalFunction, resultFunction){
+
+  var originalSimplified = math.format(math.simplify(originalFunction))
+  //reset the innerHTML
+  document.getElementById('result-function').innerHTML ='';
+  document.getElementById('original-function').innerHTML='';
+  document.getElementById('steps-function').innerHTML='';
+  document.getElementById('rules-used').innerHTML='';
+
+  //Display Original Function in Latex Form
+
+  document.getElementById('original-function').innerHTML= laTeXed(originalFunction.replace(/ /g,''))
+  document.getElementById('original-function-simplified').innerHTML= laTeXed(originalSimplified)
+  
+  //Display result Function in Latex Form
+  var resultSimplified = math.format(math.simplify(resultFunction))
+  document.getElementById('result-function').innerHTML = laTeXed(resultFunction.replace(/ /g,''))
+  document.getElementById('result-function-simplified').innerHTML = laTeXed(resultSimplified)
+  
+
+  for(let x=0;x<derivationMethod.length;x++){
+    console.log(derivationMethod[x].derivative)
+    document.getElementById('steps-function').innerHTML += LaTexDeriv(derivationMethod[x])
+  }
+  if(rulesUsed.length==0){
+     document.getElementById('rules-used').innerHTML = "No chaining rule used!"
+  }
+    for(let x=0;x<rulesUsed.length;x++){
+    document.getElementById('rules-used').innerHTML += rulesUsed[x]+'\n';
+  }
+}
+
+var parseErrorType = function(str){
+        if(str.match(/SyntaxError: Parenthesis/g)){
+         return "It seems like there is a missing Parenthesis in your function."
+        }
+        if(str.match(/SyntaxError: Unexpected end of expression/g)){
+          return "It seems like your function ends up abruptly."
+        }
+        if(str.match(/TypeError: Too few arguments in function/g)){
+          //Detects the name of the empty function
+          var pbErr= str.match(/function+\s[a-z][a-z][a-z]/)[0].slice(9, str.length-1)
+          return "It seems like the "+ pbErr +" function is empty."
+        }
+        else{
+          return str;
+        }
+}
+//SPECIAL STRING SPLICER
 // Takes in 3 arguments, 
 //{expression}the expression you are trying to check
 //{regEx} the value you are trying to find
