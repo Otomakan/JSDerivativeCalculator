@@ -1,24 +1,22 @@
-html {
+/*html {
   background: white;
   color: black;
-}
+}*/
 
-body {
-  color: #000;
+#derivative-calculator-wrapper {
+  /*background-color:blue;*/
   font-family: 'Raleway', sans-serif;
-  /*font: 300 18px/1.6 "Source Sans Pro", sans-serif;*/
+  font: 300 18px/1.6 "Source Sans Pro", sans-serif;
   margin: 0;
   padding: 5em 0 2em;
   text-align: center;
-}
-
-h1 {
-  /*font-weight: 300;*/
-  margin: 0;
+  min-width: 300px;
+  max-width: 300px;
 }
 
 .calculator{
-  /*display: flex;*/
+  display: flex;
+  /*vertical-align:middle;*/
 }
 .btn {
   transition: all 0.5s;
@@ -101,7 +99,7 @@ h1 {
 }
 #examples{
   display: none;
-  margin: 10px 15vw;
+  margin: 10px 0;
   align-items: center;
   visibility: hidden;
   opacity: 0;
@@ -141,7 +139,6 @@ h1 {
 #results{
   margin:50px auto;
   border:1px solid #000;
-  width:60vw;
   max-width: 500px;
   text-align: center;
   padding:50px;

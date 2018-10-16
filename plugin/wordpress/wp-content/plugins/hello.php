@@ -4,12 +4,12 @@
  * @version 1.7
  */
 /*
-Plugin Name: Hello Dolly
-Plugin URI: http://wordpress.org/plugins/hello-dolly/
-Description: This is not just a plugin, it symbolizes the hope and enthusiasm of an entire generation summed up in two words sung most famously by Louis Armstrong: Hello, Dolly. When activated you will randomly see a lyric from <cite>Hello, Dolly</cite> in the upper right of your admin screen on every page.
-Author: Matt Mullenweg
-Version: 1.7
-Author URI: http://ma.tt/
+Plugin Name: Derivative Calculator
+Plugin URI: jmisteli.com/deritivativescalculator
+Description: This plugin will allow you to have a Javascript Derivative Calculator on your website
+Author: Jack Misteli
+Version: 0.1
+Author URI: http://jmisteli.com
 */
 
 function hello_dolly_get_lyric() {

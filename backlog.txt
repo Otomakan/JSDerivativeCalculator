@@ -29,6 +29,7 @@ https://math.stackexchange.com/questions/1246766/derivative-of-the-gamma-functio
 Problem with abs turning into ab2
 same for asec ad all the a family probly
 
+
 x ^ (-1/3) This doesn't work
 
 Line 43107 created a custom erf function, The problem is that it uses ln and pi which are converted to numbers
