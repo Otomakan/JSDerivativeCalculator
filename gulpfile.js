@@ -1,9 +1,39 @@
 const gulp = require('gulp')
 const uglify = require('gulp-uglify')
 const babel = require('gulp-babel')
+const cleanCSS= require('gulp-clean-css')
+const browserSync = require('browser-sync').create()
+const autoprefixer = require('gulp-autoprefixer')
 
+const sass = require('gulp-sass');
+const AUTOPREFIXER_BROWSERS = [
+  'ie >= 10',
+  'ie_mob >= 10',
+  'ff >= 30',
+  'chrome >= 34',
+  'safari >= 7',
+  'opera >= 23',
+  'ios >= 7',
+  'android >= 4.4',
+  'bb >= 10'
+];
+
+gulp.task('serve', function() {
+
+    browserSync.init({
+        server: "./"
+    });
+    gulp.watch('src/js/*.js',['compress'])
+
+    gulp.watch('src/style/*.scss',['clean-css'])
+
+    gulp.watch('src/style/*.scss').on('change',browserSync.reload)
+
+    gulp.watch('*').on('change',browserSync.reload)
+
+})
 gulp.task('compress',()=>
-	gulp.src('*.js')
+	gulp.src('src/js/main.js')
 	.pipe(babel({
             presets: ['@babel/env']
         }))
@@ -11,4 +41,14 @@ gulp.task('compress',()=>
             console.log(e);}))
 	.pipe(gulp.dest('./dist/'))
 )
-gulp.task('default',['compress'])
+
+gulp.task('clean-css',()=>
+	gulp.src('src/style/*.scss')
+	.pipe(sass().on('error', sass.logError))
+	.pipe(autoprefixer({browsers: AUTOPREFIXER_BROWSERS}))
+	.pipe(cleanCSS())
+	.pipe(gulp.dest('./dist'))
+	)
+
+gulp.task
+gulp.task('default',['serve','compress','clean-css'])

@@ -1,0 +1,158 @@
+/*html {
+  background: white;
+  color: black;
+}*/
+
+#derivative-calculator-wrapper {
+  // background-color:blue;
+  font-family: 'Raleway', sans-serif;
+  font: 300 18px/1.6 "Source Sans Pro", sans-serif;
+  margin: 0;
+  padding: 5em 0 2em;
+  text-align: center;
+  min-width: 300px;
+  max-width: 300px;
+}
+
+.calculator{
+  display: flex;
+  /*vertical-align:middle;*/
+}
+.btn {
+  transition: all 0.5s;
+}
+.btn.btn-dark{
+  /*left: 50%;*/
+
+  background-color: #fff;
+  color: #000;
+  border:1px solid black;
+  font-size: 17px;
+  letter-spacing: 2px;
+  padding: 10px 20px;
+    text-decoration: none;    
+    -webkit-transition: all .4s ease-in-out;
+     -moz-transition: all .4s ease-in-out;
+      -ms-transition: all .4s ease-in-out;
+       -o-transition: all .4s ease-in-out;
+          transition: all .4s ease-in-out;
+}
+.btn-dark:hover {
+  background-color: #000;
+  color:#fff;
+}
+.btn-dark:focus {
+  outline: none;
+}
+
+.math-input{
+  background-color: #fff;
+  color: #000;
+  border:1px solid black;
+  font-size: 17px;
+  letter-spacing: 2px;
+  padding: 10px 20px;
+/*  -webkit-transition: all .1s ease-in-out;
+     -moz-transition: all .1s ease-in-out;
+      -ms-transition: all .1s ease-in-out;
+       -o-transition: all .1s ease-in-out;
+          transition: all .1s ease-in-out;*/
+}
+
+.math-input:focus{
+  outline: 1px solid black;
+  /*border-width:  2px;*/
+}
+.math-input.not-ready{
+  outline:1px solid red;
+}
+#input-first-helper{
+  color:red;  
+  position: absolute;
+}
+#operators{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+          transition: all .4s ease-in-out;
+}
+
+#operators div{
+  font-size: 24px;
+  padding: 2px 5px;
+  border:1px solid black;
+  cursor: pointer;  
+  margin:3px 3px;
+      -webkit-transition: all .4s ease-in-out;
+     -moz-transition: all .4s ease-in-out;
+      -ms-transition: all .4s ease-in-out;
+       -o-transition: all .4s ease-in-out;
+}
+
+#operators div:hover{
+  background-color: #000;
+  color: #fff;
+}
+#show-examples-button{
+  margin-top:10px;
+}
+#examples{
+  display: none;
+  margin: 10px 0;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  justify-content: center;
+     -webkit-transition: all 1s linear;
+    -moz-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    transition: all 1s linear;
+}
+#examples.show{
+  visibility: visible;
+  opacity: 1;
+  display: flex;
+  flex-wrap: wrap;
+}
+#examples .example{
+  font-size: 18px;
+  padding: 2px 5px;
+  border:1px solid black;
+  cursor: pointer;  
+  margin:3px 3px;
+      -webkit-transition: all .4s ease-in-out;
+     -moz-transition: all .4s ease-in-out;
+      -ms-transition: all .4s ease-in-out;
+       -o-transition: all .4s ease-in-out;
+}
+#examples .example:hover{
+  background-color: #000;
+  color:#fff;
+}
+.MJXc-display{ 
+    text-align: center !important;
+    /*display: inline !important;*/
+}
+
+
+#results{
+  margin:50px auto;
+  border:1px solid #000;
+  max-width: 500px;
+  text-align: center;
+  padding:50px;
+}
+
+#derivative-calculator-errors{
+  color:red;
+}
+#graph-section{
+  width:100vw;
+}
+#graph{
+  width:100%;
+}
+#quadratic{
+  background:white;
+}
