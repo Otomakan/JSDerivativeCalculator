@@ -79,6 +79,17 @@ ready(function(){
     derivationMethod = [];
     resultFunction="";
     rulesUsed=[];
+    //Deleting traces of results
+    
+    let nextButton = document.getElementById('next-derivative')
+    if(nextButton){
+      nextButton.remove()
+      
+      document.getElementById('secondary-results').innerHTML=""
+      
+    }
+
+    // results.childNodes.forEach((node)=> {node.childNodes.forEach((bbnode)=>{if(bbnode.tagName=="DIV"){bbnode.innerHTML=""}})})
     try{
       var inputEl = document.getElementById("main-input");// Equal button
       var originalFunction = inputEl.value;
@@ -95,7 +106,7 @@ ready(function(){
     //Catching potential errors and parsing some of them with Regex in order to have some nice rendering
     catch(err){
         console.log('hmmm there was an error with your input')
-        errMessage = parseErrorType(err.toString());
+        let errMessage = parseErrorType(err.toString());
          document.getElementById('derivative-calculator-errors').innerHTML= errMessage;
         throw err;
     } 
@@ -354,7 +365,7 @@ var setResultHTML = function(originalFunction, resultFunction){
     //Catching potential errors and parsing some of them with Regex in order to have some nice rendering
     catch(err){
         console.log('hmmm there was an error with your input')
-        errMessage = parseErrorType(err.toString());
+        let errMessage = parseErrorType(err.toString());
          document.getElementById('derivative-calculator-errors').innerHTML= errMessage;
         throw err;
     } 
@@ -367,10 +378,12 @@ var appendResultHTML = function(originalFunction, resultFunction, iteration){
   var newResultTitle = document.createElement("h5")
   newResultTitle.innerHTML = iteration + 'th derivative'
   newResult.setAttribute('id','derivative-result-'+iteration);
+  newResultTitle.classList.add('secondary-derivative-result-title');
+  newResult.classList.add('secondary-derivative-result');
   newResult.innerHTML = laTeXed(resultFunction.replace(/ /g,''))
   // nextFunctionBtn.setAttribute('id','next-derivative');
-  document.getElementById('results').insertBefore(newResultTitle, document.getElementById('next-derivative'))
-  document.getElementById('results').insertBefore(newResult, document.getElementById('next-derivative'))
+  document.getElementById('secondary-results').appendChild(newResultTitle)
+  document.getElementById('secondary-results').appendChild(newResult)
   console.log("originalFunction is " + originalFunction);
   console.log("result function is " + resultFunction);
   document.getElementById('next-derivative').onclick = function(){
@@ -387,7 +400,6 @@ var appendResultHTML = function(originalFunction, resultFunction, iteration){
     catch(err){
       console.log("There was an error calculating the next derivative");
     }
-  document.getElementById('results').insertBefore(newResult,document.getElementById('next-derivative'));
 }
 }
 
