@@ -1,7 +1,6 @@
 {
   "name": "derivativescalculator",
   "version": "1.0.0",
-  "description": "",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,5 +10,22 @@
   "dependencies": {
     "d3": "^3.5.17",
     "function-plot": "^1.18.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Otomakan/JSDerivativeCalculator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Otomakan/JSDerivativeCalculator/issues"
+  },
+  "homepage": "https://github.com/Otomakan/JSDerivativeCalculator#readme",
+  "description": "",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "babelify": "^10.0.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^8.0.0",
+    "gulp-uglify": "^3.0.1"
   }
 }
