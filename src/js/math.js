@@ -26,99 +26,99 @@
  */
 
 (function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["math"] = factory();
-	else
-		root["math"] = factory();
+  if(typeof exports === 'object' && typeof module === 'object')
+    module.exports = factory();
+  else if(typeof define === 'function' && define.amd)
+    define([], factory);
+  else if(typeof exports === 'object')
+    exports["math"] = factory();
+  else
+    root["math"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
+/******/  // The module cache
+/******/  var installedModules = {};
 /******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
+/******/  // The require function
+/******/  function __webpack_require__(moduleId) {
 /******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
+/******/    // Check if module is in cache
+/******/    if(installedModules[moduleId]) {
+/******/      return installedModules[moduleId].exports;
+/******/    }
+/******/    // Create a new module (and put it into the cache)
+/******/    var module = installedModules[moduleId] = {
+/******/      i: moduleId,
+/******/      l: false,
+/******/      exports: {}
+/******/    };
 /******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/    // Execute the module function
+/******/    modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
+/******/    // Flag the module as loaded
+/******/    module.l = true;
 /******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
-/******/ 	// mode & 2: merge all properties of value into the ns
-/******/ 	// mode & 4: return value when already ns object
-/******/ 	// mode & 8|1: behave like require
-/******/ 	__webpack_require__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __webpack_require__(value);
-/******/ 		if(mode & 8) return value;
-/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-/******/ 		var ns = Object.create(null);
-/******/ 		__webpack_require__.r(ns);
-/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-/******/ 		return ns;
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/    // Return the exports of the module
+/******/    return module.exports;
+/******/  }
 /******/
 /******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 152);
+/******/  // expose the modules object (__webpack_modules__)
+/******/  __webpack_require__.m = modules;
+/******/
+/******/  // expose the module cache
+/******/  __webpack_require__.c = installedModules;
+/******/
+/******/  // define getter function for harmony exports
+/******/  __webpack_require__.d = function(exports, name, getter) {
+/******/    if(!__webpack_require__.o(exports, name)) {
+/******/      Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/    }
+/******/  };
+/******/
+/******/  // define __esModule on exports
+/******/  __webpack_require__.r = function(exports) {
+/******/    if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/      Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/    }
+/******/    Object.defineProperty(exports, '__esModule', { value: true });
+/******/  };
+/******/
+/******/  // create a fake namespace object
+/******/  // mode & 1: value is a module id, require it
+/******/  // mode & 2: merge all properties of value into the ns
+/******/  // mode & 4: return value when already ns object
+/******/  // mode & 8|1: behave like require
+/******/  __webpack_require__.t = function(value, mode) {
+/******/    if(mode & 1) value = __webpack_require__(value);
+/******/    if(mode & 8) return value;
+/******/    if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/    var ns = Object.create(null);
+/******/    __webpack_require__.r(ns);
+/******/    Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/    if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/    return ns;
+/******/  };
+/******/
+/******/  // getDefaultExport function for compatibility with non-harmony modules
+/******/  __webpack_require__.n = function(module) {
+/******/    var getter = module && module.__esModule ?
+/******/      function getDefault() { return module['default']; } :
+/******/      function getModuleExports() { return module; };
+/******/    __webpack_require__.d(getter, 'a', getter);
+/******/    return getter;
+/******/  };
+/******/
+/******/  // Object.prototype.hasOwnProperty.call
+/******/  __webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/  // __webpack_public_path__
+/******/  __webpack_require__.p = "";
+/******/
+/******/
+/******/  // Load entry module and return exports
+/******/  return __webpack_require__(__webpack_require__.s = 152);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -30340,7 +30340,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! decimal.js v10.0.1 https://github.com/Mike
     !(__WEBPACK_AMD_DEFINE_RESULT__ = (function () {
       return Decimal;
     }).call(exports, __webpack_require__, exports, module),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+        __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
   // Node and other environments that support module.exports.
   } else {}
@@ -30563,9 +30563,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   if (true) {
     // AMD. Register as an anonymous module.
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+        __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+        (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+        __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else {}
 }(this, function () {
 
@@ -34583,7 +34583,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
       return Complex;
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+        __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else {}
 
 })(this);
@@ -35662,7 +35662,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
       return Fraction;
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+        __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else {}
 
 })(this);
@@ -42965,7 +42965,8 @@ function factory(type, config, load, typed) {
           console.log('d/dx(cbrt(x)) = 1 / (3x^(2/3))')
           derivationMethod.push({
             func:node.name,
-            derivative: '1 / (3x^(2/3))'
+            derivative: '1 / (3x^(2/3))',
+            xvalue: arg0,
           });
           div = true;
           funcDerivative = new OperatorNode('*', 'multiply', [createConstantNode(3), new OperatorNode('^', 'pow', [arg0, new OperatorNode('/', 'divide', [createConstantNode(2), createConstantNode(3)])])]);
@@ -42973,11 +42974,10 @@ function factory(type, config, load, typed) {
 
         case 'sqrt':
         case 'nthRoot':
-          // d/dx(sqrt(x)) = 1 / (2*sqrt(x))
-          console.log('d/dx(sqrt(x)) = 1 / (2*sqrt(x))')
-           derivationMethod.push({
+          derivationMethod.push({
             func:node.name,
-            derivative: '1 / (2*sqrt(x))'
+            derivative: '1 / (2*sqrt(x))',
+            xvalue: arg0,
           });
           if (node.args.length === 1) {
             div = true;
@@ -43002,7 +43002,8 @@ function factory(type, config, load, typed) {
             // d/dx(log(x)) = 1 / x
           derivationMethod.push({
             func:node.name,
-            derivative: '1 / x'
+            derivative: '1 / x',
+            xvalue: arg0,
           });
           
             funcDerivative = arg0.clone();
@@ -43011,7 +43012,8 @@ function factory(type, config, load, typed) {
             // d/dx(log(x, c)) = 1 / (x*ln(c))
             derivationMethod.push({
               func:node.name,
-              derivative: '1 / (x*ln(c))'
+              derivative: '1 / (x*ln(c))',
+            xvalue: arg0,
             });
             funcDerivative = new OperatorNode('*', 'multiply', [arg0.clone(), new FunctionNode('log', [arg1 || node.args[1]])]);
             div = true;
@@ -43019,8 +43021,9 @@ function factory(type, config, load, typed) {
             // d/dx(log(f(x), g(x))) = d/dx(log(f(x)) / log(g(x)))
             derivationMethod.push({
               func:node.name,
-              derivative: '\\frac{dn}{du}(log(f(x)) / log(g(x)))'
-            });
+              derivative: '\\frac{dn}{du}(log(f(x)) / log(g(x)))',
+            xvalue: arg0,
+        });
             return _derivative(new OperatorNode('/', 'divide', [new FunctionNode('log', [arg0]), new FunctionNode('log', [node.args[1]])]), constNodes);
           }
 
@@ -43029,7 +43032,8 @@ function factory(type, config, load, typed) {
         case 'exp':
           derivationMethod.push({
             func:node.name,
-            derivative: 'e^x'
+            derivative: 'e^x',
+            xvalue: arg0,
           });
           
           funcDerivative = new FunctionNode('exp', [arg0.clone()]);
@@ -43038,7 +43042,8 @@ function factory(type, config, load, typed) {
         case 'sin':
           derivationMethod.push({
             func:node.name,
-            derivative: 'cos(x)'
+            derivative: 'cos(x)',
+            xvalue: arg0,
           });
           funcDerivative = new FunctionNode('cos', [arg0.clone()]);
           break;
@@ -43047,7 +43052,8 @@ function factory(type, config, load, typed) {
           // d/dx(cos(x)) = -sin(x)
           derivationMethod.push({
               func:node.name,
-              derivative: '-sin(x)'
+              derivative: '-sin(x)',
+            xvalue: arg0,
           });
           funcDerivative = new OperatorNode('-', 'unaryMinus', [new FunctionNode('sin', [arg0.clone()])]);
           break;
@@ -43056,7 +43062,8 @@ function factory(type, config, load, typed) {
           // d/dx(tan(x)) = sec(x)^2
           derivationMethod.push({
               func:node.name,
-              derivative: 'sec(x)^2'
+              derivative: 'sec(x)^2',
+            xvalue: arg0,
           });
           funcDerivative = new OperatorNode('^', 'pow', [new FunctionNode('sec', [arg0.clone()]), createConstantNode(2)]);
           break;
@@ -43065,7 +43072,8 @@ function factory(type, config, load, typed) {
           // d/dx(sec(x)) = sec(x)tan(x)
           derivationMethod.push({
               func:node.name,
-              derivative: 'sec(x)tan(x)'
+              derivative: 'sec(x)tan(x)',
+            xvalue: arg0,
           });
           funcDerivative = new OperatorNode('*', 'multiply', [node, new FunctionNode('tan', [arg0.clone()])]);
           break;
@@ -43074,7 +43082,8 @@ function factory(type, config, load, typed) {
           // d/dx(csc(x)) = -csc(x)cot(x)
           derivationMethod.push({
               func:node.name,
-              derivative: '-csc(x)cot(x)'
+              derivative: '-csc(x)cot(x)',
+            xvalue: arg0,
           });
           negative = true;
           funcDerivative = new OperatorNode('*', 'multiply', [node, new FunctionNode('cot', [arg0.clone()])]);
@@ -43084,7 +43093,8 @@ function factory(type, config, load, typed) {
           // d/dx(cot(x)) = -csc(x)^2
           derivationMethod.push({
               func:node.name,
-              derivative: '-csc(x)^2'
+              derivative: '-csc(x)^2',
+            xvalue: arg0,
           });
           negative = true;
           funcDerivative = new OperatorNode('^', 'pow', [new FunctionNode('csc', [arg0.clone()]), createConstantNode(2)]);
@@ -43094,7 +43104,8 @@ function factory(type, config, load, typed) {
           // d/dx(asin(x)) = 1 / sqrt(1 - x^2)
           derivationMethod.push({
               func:node.name,
-              derivative: '1 / sqrt(1 - x^2)'
+              derivative: '1 / sqrt(1 - x^2)',
+            xvalue: arg0,
           });
           div = true;
           funcDerivative = new FunctionNode('sqrt', [new OperatorNode('-', 'subtract', [createConstantNode(1), new OperatorNode('^', 'pow', [arg0.clone(), createConstantNode(2)])])]);
@@ -43104,7 +43115,8 @@ function factory(type, config, load, typed) {
           // d/dx(acos(x)) = -1 / sqrt(1 - x^2)
           derivationMethod.push({
               func:node.name,
-              derivative: '-1 / sqrt(1 - x^2)'
+              derivative: '-1 / sqrt(1 - x^2)',
+            xvalue: arg0,
           });
           div = true;
           negative = true;
@@ -43115,7 +43127,8 @@ function factory(type, config, load, typed) {
           // d/dx(atan(x)) = 1 / (x^2 + 1)
            derivationMethod.push({
               func:node.name,
-              derivative: '1 / (x^2 + 1)'
+              derivative: '1 / (x^2 + 1)',
+            xvalue: arg0,
           });
           div = true;
           funcDerivative = new OperatorNode('+', 'add', [new OperatorNode('^', 'pow', [arg0.clone(), createConstantNode(2)]), createConstantNode(1)]);
@@ -43125,7 +43138,8 @@ function factory(type, config, load, typed) {
           // d/dx(asec(x)) = 1 / (|x|*sqrt(x^2 - 1))
            derivationMethod.push({
               func:node.name,
-              derivative: '1 / (|x|*sqrt(x^2 - 1))'
+              derivative: '1 / (|x|*sqrt(x^2 - 1))',
+            xvalue: arg0,
           });
           div = true;
           funcDerivative = new OperatorNode('*', 'multiply', [new FunctionNode('abs', [arg0.clone()]), new FunctionNode('sqrt', [new OperatorNode('-', 'subtract', [new OperatorNode('^', 'pow', [arg0.clone(), createConstantNode(2)]), createConstantNode(1)])])]);
@@ -43135,7 +43149,8 @@ function factory(type, config, load, typed) {
           // d/dx(acsc(x)) = -1 / (|x|*sqrt(x^2 - 1))
           derivationMethod.push({
               func:node.name,
-              derivative: '-1 / (|x|*sqrt(x^2 - 1))'
+              derivative: '-1 / (|x|*sqrt(x^2 - 1))',
+            xvalue: arg0,
           });
           div = true;
           negative = true;
@@ -43148,7 +43163,8 @@ function factory(type, config, load, typed) {
           // d/dx(acot(x)) = -1 / (x^2 + 1)
           derivationMethod.push({
               func:node.name,
-              derivative: '-1 / (x^2 + 1)'
+              derivative: '-1 / (x^2 + 1)',
+            xvalue: arg0,
           });
           div = true;
           negative = true;
@@ -43162,7 +43178,8 @@ function factory(type, config, load, typed) {
             // d/dx(log(x)) = 1 / x
             derivationMethod.push({
               func:node.name,
-              derivative: '1 / x'
+              derivative: '1 / x',
+            xvalue: arg0,
             });
             funcDerivative = arg0.clone();
             div = true;
@@ -43184,7 +43201,8 @@ function factory(type, config, load, typed) {
           // funcDerivative = new FunctionNode('exp', [arg0.clone()]);
           derivationMethod.push({
               func:node.name,
-              derivative: '2*(e^(-x^(2))/sqrt(pi)'
+              derivative: '2*(e^(-x^(2))/sqrt(pi)',
+            xvalue: arg0,
             });
           funcDerivative = new OperatorNode('/', 'divide',
             //Top Division
@@ -43215,7 +43233,8 @@ function factory(type, config, load, typed) {
           // d/dx(sinh(x)) = cosh(x)
           derivationMethod.push({
               func:node.name,
-              derivative: 'cosh(x)'
+              derivative: 'cosh(x)',
+            xvalue: arg0,
             });
           funcDerivative = new FunctionNode('cosh', [arg0.clone()]);
           break;
@@ -43224,7 +43243,8 @@ function factory(type, config, load, typed) {
           // d/dx(cosh(x)) = sinh(x)
           derivationMethod.push({
               func:node.name,
-              derivative: 'sinh(x)'
+              derivative: 'sinh(x)',
+            xvalue: arg0,
             });
           funcDerivative = new FunctionNode('sinh', [arg0.clone()]);
           break;
@@ -43233,7 +43253,8 @@ function factory(type, config, load, typed) {
           // d/dx(tanh(x)) = sech(x)^2
            derivationMethod.push({
               func:node.name,
-              derivative: 'sech(x)'
+              derivative: 'sech(x)',
+            xvalue: arg0,
             });
           funcDerivative = new OperatorNode('^', 'pow', [new FunctionNode('sech', [arg0.clone()]), createConstantNode(2)]);
           break;
@@ -43242,7 +43263,8 @@ function factory(type, config, load, typed) {
           // d/dx(sech(x)) = -sech(x)tanh(x)
          derivationMethod.push({
             func:node.name,
-            derivative: '-sech(x)tanh(x)'
+            derivative: '-sech(x)tanh(x)',
+            xvalue: arg0,
           });
           negative = true;
           funcDerivative = new OperatorNode('*', 'multiply', [node, new FunctionNode('tanh', [arg0.clone()])]);
@@ -43252,7 +43274,8 @@ function factory(type, config, load, typed) {
           // d/dx(csch(x)) = -csch(x)coth(x)
          derivationMethod.push({
             func:node.name,
-            derivative: '-csch(x)coth(x)'
+            derivative: '-csch(x)coth(x)',
+            xvalue: arg0,
           });
           negative = true;
           funcDerivative = new OperatorNode('*', 'multiply', [node, new FunctionNode('coth', [arg0.clone()])]);
@@ -43262,7 +43285,8 @@ function factory(type, config, load, typed) {
           // d/dx(coth(x)) = -csch(x)^2
           derivationMethod.push({
               func:node.name,
-              derivative: '-csch(x)^2'
+              derivative: '-csch(x)^2',
+            xvalue: arg0,
             });
           negative = true;
           funcDerivative = new OperatorNode('^', 'pow', [new FunctionNode('csch', [arg0.clone()]), createConstantNode(2)]);
@@ -43272,7 +43296,8 @@ function factory(type, config, load, typed) {
           // d/dx(asinh(x)) = 1 / sqrt(x^2 + 1)
           derivationMethod.push({
               func:node.name,
-              derivative: '1 / sqrt(x^2 + 1)'
+              derivative: '1 / sqrt(x^2 + 1)',
+            xvalue: arg0,
             });
           div = true;
           funcDerivative = new FunctionNode('sqrt', [new OperatorNode('+', 'add', [new OperatorNode('^', 'pow', [arg0.clone(), createConstantNode(2)]), createConstantNode(1)])]);
@@ -43282,7 +43307,8 @@ function factory(type, config, load, typed) {
           // d/dx(acosh(x)) = 1 / sqrt(x^2 - 1); XXX potentially only for x >= 1 (the real spectrum)
            derivationMethod.push({
               func:node.name,
-              derivative: '1 / sqrt(x^2 - 1)'
+              derivative: '1 / sqrt(x^2 - 1)',
+            xvalue: arg0,
             });
           div = true;
           funcDerivative = new FunctionNode('sqrt', [new OperatorNode('-', 'subtract', [new OperatorNode('^', 'pow', [arg0.clone(), createConstantNode(2)]), createConstantNode(1)])]);
@@ -43292,7 +43318,8 @@ function factory(type, config, load, typed) {
           // d/dx(atanh(x)) = 1 / (1 - x^2)
           derivationMethod.push({
               func:node.name,
-              derivative: '1 / (1 - x^2)'
+              derivative: '1 / (1 - x^2)',
+            xvalue: arg0,
             });
           div = true;
           funcDerivative = new OperatorNode('-', 'subtract', [createConstantNode(1), new OperatorNode('^', 'pow', [arg0.clone(), createConstantNode(2)])]);
@@ -43302,7 +43329,8 @@ function factory(type, config, load, typed) {
           // d/dx(asech(x)) = -1 / (x*sqrt(1 - x^2))
            derivationMethod.push({
               func:node.name,
-              derivative: '-1 / (x*sqrt(1 - x^2))'
+              derivative: '-1 / (x*sqrt(1 - x^2))',
+            xvalue: arg0,
             });
           div = true;
           negative = true;
@@ -43313,7 +43341,8 @@ function factory(type, config, load, typed) {
           // d/dx(acsch(x)) = -1 / (|x|*sqrt(x^2 + 1))
           derivationMethod.push({
               func:node.name,
-              derivative: '-1 / (|x|*sqrt(x^2 + 1))'
+              derivative: '-1 / (|x|*sqrt(x^2 + 1))',
+            xvalue: arg0,
             });
           div = true;
           negative = true;
@@ -43324,7 +43353,8 @@ function factory(type, config, load, typed) {
           // d/dx(acoth(x)) = -1 / (1 - x^2)
           derivationMethod.push({
               func:node.name,
-              derivative: '-1 / (1 - x^2)'
+              derivative: '-1 / (1 - x^2)',
+            xvalue: arg0,
           });
           div = true;
           negative = true;
@@ -43335,7 +43365,8 @@ function factory(type, config, load, typed) {
           // d/dx(abs(x)) = abs(x)/x
           derivationMethod.push({
               func:node.name,
-              derivative: 'abs(x)/x'
+              derivative: 'abs(x)/x',
+            xvalue: arg0,
           });
           funcDerivative = new OperatorNode('/', 'divide', [new FunctionNode(new SymbolNode('abs'), [arg0.clone()]), arg0.clone()]);
           break;
@@ -43362,13 +43393,27 @@ function factory(type, config, load, typed) {
       var chainDerivative = _derivative(arg0, constNodes);
       // console.log()
       if(arg0.args){
-        rulesUsed.push('Applying the chain rule from '+node.name+' to '+arg0.fn);
+        if(div){
+          rulesUsed.push({
+            orig:node,
+            rest:arg0,
+            derivRule: new OperatorNode('/', 'divide',[createConstantNode(1), funcDerivative])
+          })
+        }
+        else{
+          rulesUsed.push({
+            orig:node,
+            derivRule:funcDerivative,
+            rest:arg0
+          })
+        }
+        
+        // 'Applying the chain rule from '+node.name+' to '+arg0.fn);
       }
-      
-
+   
       if (negative) {
         chainDerivative = new OperatorNode('-', 'unaryMinus', [chainDerivative]);
-      }
+      } 
 
       return new OperatorNode(op, func, [chainDerivative, funcDerivative]);
     },
@@ -43420,6 +43465,8 @@ function factory(type, config, load, typed) {
       }
 
       if (node.op === '/' && node.isBinary()) {
+        console.log('applying quotient rule  d/dx(f(x) / g(x)) = (f\'(x)g(x) - f(x)g\'(x)) / g(x)^2')
+        
         var arg0 = node.args[0];
         var arg1 = node.args[1]; // d/dx(f(x) / c) = f'(x) / c
 
@@ -53097,44 +53144,44 @@ exports.factory = factory;
  */
 /*jshint unused:false */
 module.exports = function naturalSort (a, b) {
-	"use strict";
-	var re = /(^([+\-]?(?:0|[1-9]\d*)(?:\.\d*)?(?:[eE][+\-]?\d+)?)?$|^0x[0-9a-f]+$|\d+)/gi,
-		sre = /(^[ ]*|[ ]*$)/g,
-		dre = /(^([\w ]+,?[\w ]+)?[\w ]+,?[\w ]+\d+:\d+(:\d+)?[\w ]?|^\d{1,4}[\/\-]\d{1,4}[\/\-]\d{1,4}|^\w+, \w+ \d+, \d{4})/,
-		hre = /^0x[0-9a-f]+$/i,
-		ore = /^0/,
-		i = function(s) { return naturalSort.insensitive && ('' + s).toLowerCase() || '' + s; },
-		// convert all to strings strip whitespace
-		x = i(a).replace(sre, '') || '',
-		y = i(b).replace(sre, '') || '',
-		// chunk/tokenize
-		xN = x.replace(re, '\0$1\0').replace(/\0$/,'').replace(/^\0/,'').split('\0'),
-		yN = y.replace(re, '\0$1\0').replace(/\0$/,'').replace(/^\0/,'').split('\0'),
-		// numeric, hex or date detection
-		xD = parseInt(x.match(hre), 16) || (xN.length !== 1 && x.match(dre) && Date.parse(x)),
-		yD = parseInt(y.match(hre), 16) || xD && y.match(dre) && Date.parse(y) || null,
-		oFxNcL, oFyNcL;
-	// first try and sort Hex codes or Dates
-	if (yD) {
-		if ( xD < yD ) { return -1; }
-		else if ( xD > yD ) { return 1; }
-	}
-	// natural sorting through split numeric strings and default strings
-	for(var cLoc=0, numS=Math.max(xN.length, yN.length); cLoc < numS; cLoc++) {
-		// find floats not starting with '0', string or 0 if not defined (Clint Priest)
-		oFxNcL = !(xN[cLoc] || '').match(ore) && parseFloat(xN[cLoc]) || xN[cLoc] || 0;
-		oFyNcL = !(yN[cLoc] || '').match(ore) && parseFloat(yN[cLoc]) || yN[cLoc] || 0;
-		// handle numeric vs string comparison - number < string - (Kyle Adams)
-		if (isNaN(oFxNcL) !== isNaN(oFyNcL)) { return (isNaN(oFxNcL)) ? 1 : -1; }
-		// rely on string comparison if different types - i.e. '02' < 2 != '02' < '2'
-		else if (typeof oFxNcL !== typeof oFyNcL) {
-			oFxNcL += '';
-			oFyNcL += '';
-		}
-		if (oFxNcL < oFyNcL) { return -1; }
-		if (oFxNcL > oFyNcL) { return 1; }
-	}
-	return 0;
+  "use strict";
+  var re = /(^([+\-]?(?:0|[1-9]\d*)(?:\.\d*)?(?:[eE][+\-]?\d+)?)?$|^0x[0-9a-f]+$|\d+)/gi,
+    sre = /(^[ ]*|[ ]*$)/g,
+    dre = /(^([\w ]+,?[\w ]+)?[\w ]+,?[\w ]+\d+:\d+(:\d+)?[\w ]?|^\d{1,4}[\/\-]\d{1,4}[\/\-]\d{1,4}|^\w+, \w+ \d+, \d{4})/,
+    hre = /^0x[0-9a-f]+$/i,
+    ore = /^0/,
+    i = function(s) { return naturalSort.insensitive && ('' + s).toLowerCase() || '' + s; },
+    // convert all to strings strip whitespace
+    x = i(a).replace(sre, '') || '',
+    y = i(b).replace(sre, '') || '',
+    // chunk/tokenize
+    xN = x.replace(re, '\0$1\0').replace(/\0$/,'').replace(/^\0/,'').split('\0'),
+    yN = y.replace(re, '\0$1\0').replace(/\0$/,'').replace(/^\0/,'').split('\0'),
+    // numeric, hex or date detection
+    xD = parseInt(x.match(hre), 16) || (xN.length !== 1 && x.match(dre) && Date.parse(x)),
+    yD = parseInt(y.match(hre), 16) || xD && y.match(dre) && Date.parse(y) || null,
+    oFxNcL, oFyNcL;
+  // first try and sort Hex codes or Dates
+  if (yD) {
+    if ( xD < yD ) { return -1; }
+    else if ( xD > yD ) { return 1; }
+  }
+  // natural sorting through split numeric strings and default strings
+  for(var cLoc=0, numS=Math.max(xN.length, yN.length); cLoc < numS; cLoc++) {
+    // find floats not starting with '0', string or 0 if not defined (Clint Priest)
+    oFxNcL = !(xN[cLoc] || '').match(ore) && parseFloat(xN[cLoc]) || xN[cLoc] || 0;
+    oFyNcL = !(yN[cLoc] || '').match(ore) && parseFloat(yN[cLoc]) || yN[cLoc] || 0;
+    // handle numeric vs string comparison - number < string - (Kyle Adams)
+    if (isNaN(oFxNcL) !== isNaN(oFyNcL)) { return (isNaN(oFxNcL)) ? 1 : -1; }
+    // rely on string comparison if different types - i.e. '02' < 2 != '02' < '2'
+    else if (typeof oFxNcL !== typeof oFyNcL) {
+      oFxNcL += '';
+      oFyNcL += '';
+    }
+    if (oFxNcL < oFyNcL) { return -1; }
+    if (oFxNcL > oFyNcL) { return 1; }
+  }
+  return 0;
 };
 
 
@@ -54064,15 +54111,15 @@ var g;
 
 // This works in non-strict mode
 g = (function() {
-	return this;
+  return this;
 })();
 
 try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1, eval)("this");
+  // This works if eval is allowed (see CSP)
+  g = g || Function("return this")() || (1, eval)("this");
 } catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
+  // This works if the window reference is available
+  if (typeof window === "object") g = window;
 }
 
 // g can still be undefined, but nothing to do about it...

@@ -13,49 +13,55 @@
 <script type='text/javascript' async
   src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
-<div id='derivative-calculator-wrapper'>
+<div class='container' id='derivative-calculator-wrapper'>
   <div class='calculator'>
     <div class='input-wrapper'>
       <div id='input-first-helper'></div>
-      <input id='main-input' class='math-input' type='text' value='sin(sqrt(e^x + a) / 2)' /> 
-      <div id='operators'>    
-        <div>Del</div>  
-        <div>+</div>
-        <div>-</div>
-        <div>×</div>
-        <div>÷</div>
-        <div>√</div>
-        <div>^</div>
-        <div>(</div>
-        <div>)</div>
+      <div class='input-group mb-3'>
+      <input  type='text' class='form-control' id='main-input' class='math-input' type='text' value='sin(sqrt(e^x + a) / 2)' /> 
+    </div>
+      <div  id='operators'>    
+        <div class='btn btn-primary btn-sm'>Del</div>  
+        <div class='btn btn-primary btn-sm'>+</div>
+        <div class='btn btn-primary btn-sm'>-</div>
+        <div class='btn btn-primary btn-sm'>×</div>
+        <div class='btn btn-primary btn-sm'>÷</div>
+        <div class='btn btn-primary btn-sm'>√</div>
+        <div class='btn btn-primary btn-sm'>^</div>
+        <div class='btn btn-primary btn-sm'>(</div>
+        <div class='btn btn-primary btn-sm'>)</div>
       </div>
-      <button id='go-button' class='btn btn-dark'> Calculate</button>
+      <div class='row' id='calculator-input-button-wrapper'>
+      <button id='go-button' class='btn btn-primary'> Calculate</button>
+       <button id='show-examples-button' class='btn btn-secondary'> Show Examples</button>
+       <button id='clear-all-button' class='btn btn-light'>Clear All</button>
+     </div>
+    
     </div>
   </div>
-
-  <button id='show-examples-button' class='btn btn-dark'> Show Examples</button>
+  <hr/>
   <div id='examples'></div>
 
       <div id='results'>
+        <h4>Solution</h4>
         <div id='derivative-calculator-errors'>
         </div>
        <div id='text-functions'>
-          <h4>Original Function</h4>
-          <div id='original-function'></div>
+          <h5>Input</h5>
+          <div class='mathjax-container' id='original-function'></div>
+        <!--   <h5>Simplified</h5>
+          <div class='mathjax-container' id='original-function-simplified'></div> -->
+          <h5>Differential Rules Used </h5>
+          <div class='mathjax-container' id='steps-function'></div>
+          <h5>Chaining Rules Used</h5>
+          <div class='mathjax-container' id='rules-used'></div>
+          <h5>Result Function</h5>
+          <div class='mathjax-container' id='result-function'></div>
           <h5>Simplified</h5>
-          <div id='original-function-simplified'></div>
-          <h4>Differential Rules Used </h4>
-          <div id='steps-function'></div>
-          <h4>Chaining Rules Used</h4>
-          <div id='rules-used'></div>
-          <h4>Result Function</h4>
-          <div id='result-function'></div>
-          <h5>Simplified</h5>
-          <div id='result-function-simplified'></div>
+          <div class='mathjax-container' id='result-function-simplified'></div>
         </div>
           <div id='secondary-results'>
           </div>
         <!-- <div id='quadratic'></div> -->
       </div>
     </div>  
-  </div>
