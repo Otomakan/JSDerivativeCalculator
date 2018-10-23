@@ -1,19 +1,10 @@
 
 
 //We are exeecptionaly making derivationMethods  and rulesUsed  global variables because we are accessing it in math.js
-let derivationMethod = [];
-let rulesUsed = [];
-let vala = '1';
-let valb = '2'
-// global.mathsteps = require('mathsteps')
-// let steps = mathsteps.simplifyExpression('2x + 2x + x + x');
-
-// steps.forEach(step => {
-//   console.log("before change: " + step.oldNode.toString());   // before change: 2 x + 2 x + x + x
-//   console.log("change: " + step.changeType);                  // change: ADD_POLYNOMIAL_TERMS
-//   console.log("after change: " + step.newNode.toString());    // after change: 6 x
-//   console.log("# of substeps: " + step.substeps.length);      // # of substeps: 3
-// });
+ var derivationMethod = [];
+var rulesUsed = [];
+  var vala = '1';
+  var valb = '2';
 ready(function(){
 
   var resultFunction = "";
@@ -27,29 +18,6 @@ ready(function(){
   var operators = document.getElementById('operators').querySelectorAll('div');
   var examplesDiv = document.getElementById('examples');
 
-  // Prepopulate the calculator
-  try{
-      var inputEl = document.getElementById("main-input");// Equal button
-      var originalFunction = inputEl.value;
-      originalFunction = inputFirstParser(originalFunction);
-      //Calculate the derivative
-      var resultFunction = getDerivative(originalFunction,resultFunction);
-      //Reset the errors
-      document.getElementById('derivative-calculator-errors').innerHTML= '';
-      //Write the results in the HTML
-      setResultHTML(originalFunction, resultFunction);
-      fireMathJax();
-      document.getElementById('derivative-calculator-errors').innerHTML= '';
-      generateGraph(originalFunction,resultFunction);
-    }
-    //Catching potential errors and parsing some of them with Regex in order to have some nice rendering
-    catch(err){
-        let errMessage = parseErrorType(err.toString());
-        if(errMessage.match(/MathJax is not defined/))
-          console.log('if MathJax error it\'s ok')
-        else
-         throw err;
-    } 
   //We use this function in order to put the sign in the input when clicked
   for(var i=0;i<operators.length-1;i++){
     operators[i].onclick = function(e){
@@ -111,47 +79,28 @@ ready(function(){
     derivationMethod = [];
     resultFunction="";
     rulesUsed=[];
-    //Deleting traces of results
-    
-    let nextButton = document.getElementById('next-derivative')
-    if(nextButton){
-      nextButton.remove()
-      
-      document.getElementById('secondary-results').innerHTML=""
-      
-    }
-
-    // results.childNodes.forEach((node)=> {node.childNodes.forEach((bbnode)=>{if(bbnode.tagName=="DIV"){bbnode.innerHTML=""}})})
     try{
       var inputEl = document.getElementById("main-input");// Equal button
       var originalFunction = inputEl.value;
-
       originalFunction = inputFirstParser(originalFunction);
       //Calculate the derivative
       var resultFunction = getDerivative(originalFunction,resultFunction);
-
       //Reset the errors
       document.getElementById('derivative-calculator-errors').innerHTML= '';
       //Write the results in the HTML
       setResultHTML(originalFunction, resultFunction);
-      
-      document.getElementById('derivative-calculator-errors').innerHTML= '';
       fireMathJax();
       generateGraph(originalFunction,resultFunction);
     }
     //Catching potential errors and parsing some of them with Regex in order to have some nice rendering
     catch(err){
         console.log('hmmm there was an error with your input')
-        let errMessage = parseErrorType(err.toString());
+        errMessage = parseErrorType(err.toString());
          document.getElementById('derivative-calculator-errors').innerHTML= errMessage;
         throw err;
     } 
   }
   //End goButton.onclick
-  document.getElementById('clear-all-button').onclick=()=>{
-    document.getElementById('main-input').value = '';
-  }
-  //End clear-all-button
 })
 
 
@@ -165,18 +114,8 @@ ready(function(){
   }
   function LaTexDeriv(expression){
     // var base = math.parse(expression.func)
-    let {derivative,func,xvalue}=expression
-    derivative = math.parse(expression.derivative).toTex({parenthesis: 'keep'})
-    func = math.parse(func).toTex({parenthesis: 'keep'})
-    xvalue = xvalue.toTex({parenthesis:'keep'})
-    // derivative = derivative.replace(/x/g,xvalue)
-    return '$$\\frac{dn}{du}'+func+'(x)='+derivative + '$$';
-  }
-
-  function laTexChainRule(expressions){
-    console.log(expressions)
-    let {orig,derivRule, rest}=expressions
-    return '$$\\frac{dn}{du}'+orig.toTex()+"="+derivRule.toTex()+" . \\frac{dn}{du}"+rest.toTex()+'$$'
+    var deriv = math.parse(expression.derivative);
+    return '$$\\frac{dn}{du}'+expression.func+'(x)='+deriv.toTex({parenthesis: 'keep'})+ '$$';
   }
 function toHuman(value){
   return math.format(value,14);
@@ -184,7 +123,7 @@ function toHuman(value){
 
 
 function getDerivative(originalFunction){
-  // console.log(math.parse(originalFunction));
+  console.log(math.parse(originalFunction));
   return toHuman(math.derivative((math.parse(originalFunction)), 'x'));
 }
   //Fire MathJax
@@ -194,6 +133,8 @@ function getDerivative(originalFunction){
   script.src  = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML";
   document.getElementsByTagName("head")[0].appendChild(script);
    MathJax.Hub.Queue(["Typeset",MathJax.Hub,document.getElementById('results')]);
+ 
+ 
   }
 
 //Thanks to http://youmightnotneedjquery.com/#ready
@@ -218,12 +159,21 @@ function inputFirstParser(expression, targets){
    var result=expression;
   for(var i=0;i<targets.length;i++){
       var match;
+      // if(result.match(targets[i][0])==null){
+      //   continue
+      // }
       //We detect the matches and for each appearance we splice with our special splice function,
        // cut by the length of the found and replace with target[1]
       while (match= targets[i][0].exec(result)){
         // if(match.index==0){
           result = result.splice(match.index,match[0].length,targets[i][1]);
-
+        // }
+        // else if(match.index==result.length+1){
+        //   result = result.splice(match.index,match[0].length-1,targets[i][1])
+        // }
+        // else{
+        // result = result.splice(match.index+1,match[0].length-1,targets[i][1])
+        // }
     }
     }
      return result
@@ -367,7 +317,8 @@ var setResultHTML = function(originalFunction, resultFunction){
 
   //Display Original Function in Latex Form
 
-  document.getElementById('original-function').innerHTML=laTeXed(originalSimplified);
+  document.getElementById('original-function').innerHTML= laTeXed(originalFunction.replace(/ /g,''));
+  document.getElementById('original-function-simplified').innerHTML= laTeXed(originalSimplified);
   
   //Display result Function in Latex Form
   var resultSimplified = math.format(math.simplify(resultFunction));
@@ -381,10 +332,9 @@ var setResultHTML = function(originalFunction, resultFunction){
   if(rulesUsed.length==0){
      document.getElementById('rules-used').innerHTML = "No chaining rule used!";
   }
-  for(let x=rulesUsed.length-1;x>=0;x--){
-    document.getElementById('rules-used').innerHTML += 'By applying the chain rule,'+ laTexChainRule(rulesUsed[x])+'<br/>';
+    for(let x=0;x<rulesUsed.length;x++){
+    document.getElementById('rules-used').innerHTML += rulesUsed[x]+'\n';
   }
-  // fireMathJax()
   var nextFunctionBtn = document.createElement("BUTTON");
   nextFunctionBtn.setAttribute('id','next-derivative');
   nextFunctionBtn.classList.add('btn');
@@ -404,7 +354,7 @@ var setResultHTML = function(originalFunction, resultFunction){
     //Catching potential errors and parsing some of them with Regex in order to have some nice rendering
     catch(err){
         console.log('hmmm there was an error with your input')
-        let errMessage = parseErrorType(err.toString());
+        errMessage = parseErrorType(err.toString());
          document.getElementById('derivative-calculator-errors').innerHTML= errMessage;
         throw err;
     } 
@@ -415,56 +365,30 @@ var setResultHTML = function(originalFunction, resultFunction){
 var appendResultHTML = function(originalFunction, resultFunction, iteration){
   var newResult = document.createElement("div");
   var newResultTitle = document.createElement("h5")
-  switch(iteration){
-    case 2:
-      newResultTitle.innerHTML = "2nd derivative"
-      break;
-    case 3:
-      newResultTitle.innerHTML = "3rd derivative"
-      break;
-    default:
-      newResultTitle.innerHTML = iteration + 'th derivative'
-  }
-
+  newResultTitle.innerHTML = iteration + 'th derivative'
   newResult.setAttribute('id','derivative-result-'+iteration);
-  newResultTitle.classList.add('secondary-derivative-result-title');
-  newResult.classList.add('secondary-derivative-result');
-
-  newResult.classList.add('mathjax-container');
   newResult.innerHTML = laTeXed(resultFunction.replace(/ /g,''))
   // nextFunctionBtn.setAttribute('id','next-derivative');
-  document.getElementById('secondary-results').appendChild(newResultTitle)
-  document.getElementById('secondary-results').appendChild(newResult)
-  // console.log("originalFunction is " + originalFunction);
-  // console.log("result function is " + resultFunction);
-  // Check how many derivative ups we calculated if iteration is < 5 then we allow for the calculation of a new derivative.
-    if(iteration<5){
-      document.getElementById('next-derivative').onclick = function(){
-      try{
-        //Calculate the derivative
-        var newResultFunction = getDerivative(resultFunction);
-        //Reset the errors
-        document.getElementById('derivative-calculator-errors').innerHTML= '';
-        //Write the results in the HTML 
-          appendResultHTML(resultFunction, newResultFunction, iteration+1);
-         fireMathJax();
-         generateGraph(originalFunction,resultFunction);
-        
-      }
-      catch(err){
-        console.log("There was an error calculating the next derivative");
-      }
+  document.getElementById('results').insertBefore(newResultTitle, document.getElementById('next-derivative'))
+  document.getElementById('results').insertBefore(newResult, document.getElementById('next-derivative'))
+  console.log("originalFunction is " + originalFunction);
+  console.log("result function is " + resultFunction);
+  document.getElementById('next-derivative').onclick = function(){
+    try{
+      //Calculate the derivative
+      var newResultFunction = getDerivative(resultFunction);
+      //Reset the errors
+      document.getElementById('derivative-calculator-errors').innerHTML= '';
+      //Write the results in the HTML
+      appendResultHTML(resultFunction, newResultFunction, iteration+1);
+      fireMathJax();
+      generateGraph(originalFunction,resultFunction);
     }
-  }
-  else{
-        //Display a "no more" message
-        let noMore = document.createElement('h5')
-        noMore.innerHTML="We can't calculate more than 5 derivatives up"
-        //We replace the net derivative button with a message saying we reached the limit
-        document.getElementById('results').removeChild(document.getElementById('next-derivative'))
-       document.getElementById('results').appendChild(noMore)
-      
-  }
+    catch(err){
+      console.log("There was an error calculating the next derivative");
+    }
+  document.getElementById('results').insertBefore(newResult,document.getElementById('next-derivative'));
+}
 }
 
 var parseErrorType = function(str){

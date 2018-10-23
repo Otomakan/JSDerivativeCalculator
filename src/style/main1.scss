@@ -1,7 +1,4 @@
-/*html {
-  background: white;
-  color: black;
-}*/
+
 @import "node_modules/bootstrap/scss/bootstrap";
 
 $theme-colors: (
@@ -13,9 +10,6 @@ h5{
 }
 
 #derivative-calculator-wrapper {
-  // background-color:blue;
-  // font-family: 'Raleway', sans-serif;
-  // font: 300 18px/1.6 "Source Sans Pro", sans-serif;
   margin: 0;
   padding: 5em 3em ;
   text-align: left;
@@ -23,30 +17,8 @@ h5{
 }
 
 .calculator{
-  // display: block;
 }
-// .btn {b
-// .math-input{
-//   background-color: #fff;
-//   color: #000;
-//   border:1px solid black;
-//   font-size: 17px;
-//   letter-spacing: 2px;
-//   padding: 10px 20px;
-/*  -webkit-transition: all .1s ease-in-out;
-     -moz-transition: all .1s ease-in-out;
-      -ms-transition: all .1s ease-in-out;
-       -o-transition: all .1s ease-in-out;
-          transition: all .1s ease-in-out;*/
-// }
 
-// .math-input:focus{
-//   outline: 1px solid black;
-//   /*border-width:  2px;*/
-// }
-// .math-input.not-ready{
-//   outline:1px solid red;
-// }
 
 #input-first-helper{
   color:red;  
@@ -62,23 +34,9 @@ h5{
 
 #operators div{
   margin:0 0.2em;
-//   font-size: 24px;
-//   padding: 2px 5px;
-//   border:1px solid black;
-//   cursor: pointer;  
-//   margin:3px 3px;
-//       -webkit-transition: all .4s ease-in-out;
-//      -moz-transition: all .4s ease-in-out;
-//       -ms-transition: all .4s ease-in-out;
-//        -o-transition: all .4s ease-in-out;
 }
 
-// #operators div:hover{
-//   background-color: #000;
-//   color: #fff;
-// }
 #show-examples-button{
-  // margin-top:10px;
 }
 #calculator-input-button-wrapper{
   margin:20px 0;
