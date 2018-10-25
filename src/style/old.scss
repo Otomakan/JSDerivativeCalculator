@@ -1,1 +1,110 @@
-// 
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
+$theme-colors: (
+  "primary": #0074d9,
+  "danger": #ff4136
+);
+h5{
+  font-weight: 300;
+}
+
+#derivative-calculator-wrapper {
+  margin: 0;
+  padding: 5em 3em ;
+  text-align: left;
+  width:100%;
+}
+
+.calculator{
+}
+
+
+#input-first-helper{
+  color:red;  
+  position: absolute;
+}
+#operators{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: left;
+  justify-content: left;
+          transition: all .4s ease-in-out;
+}
+
+#operators div{
+  margin:0 0.2em;
+}
+
+#show-examples-button{
+}
+#calculator-input-button-wrapper{
+  margin:20px 0;
+   button{
+  margin-right: 30px;
+   }
+}
+#examples{
+  display: none;
+  margin: 10px 0;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  justify-content: center;
+     -webkit-transition: all 1s linear;
+    -moz-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    transition: all 1s linear;
+}
+#examples.show{
+  visibility: visible;
+  opacity: 1;
+  display: flex;
+  flex-wrap: wrap;
+}
+#examples .example{
+  font-size: 18px;
+  padding: 2px 5px;
+  border:1px solid black;
+  cursor: pointer;  
+  margin:3px 3px;
+      -webkit-transition: all .4s ease-in-out;
+     -moz-transition: all .4s ease-in-out;
+      -ms-transition: all .4s ease-in-out;
+       -o-transition: all .4s ease-in-out;
+}
+#examples .example:hover{
+  background-color: #000;
+  color:#fff;
+}
+.mathjax-container{
+  overflow-x:scroll;
+}
+.MJXc-display{ 
+    text-align: center !important;
+    /*display: inline !important;*/
+}
+
+
+#results{
+  // margin:50px auto;
+  // border:1px solid #000;
+  width:100%;
+  text-align: left;
+}
+#rules-used{
+  margin-left:1em;
+  margin-bottom: 2em;
+}
+#derivative-calculator-errors{
+  color:red;
+}
+#graph-section{
+  width:100vw;
+}
+#graph{
+  width:100%;
+}
+#quadratic{
+  background:white;
+}

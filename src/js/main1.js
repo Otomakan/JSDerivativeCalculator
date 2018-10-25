@@ -152,6 +152,16 @@ ready(function(){
     document.getElementById('main-input').value = '';
   }
   //End clear-all-button
+
+    //VISUAL COMPONENTS
+  //Handling events due to scrolling
+    window.onscroll = function (e) {  
+    // called when the window is scrolled. 
+      // console.log(e)
+    document.getElementById('calculator').style.top = ((window.pageYOffset || window.scrollTop)/16) - (window.clientTop || 0)+ 5 +'em'
+     document.getElementById('calculator').style.position = 'relative'
+      
+    } 
 })
 
 

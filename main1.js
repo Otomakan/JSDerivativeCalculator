@@ -101,6 +101,13 @@ ready(function(){
     } 
   }
   //End goButton.onclick
+  console.log('working')
+  //VISUAL COMPONENTS
+//Handling events due to scrolling
+  window.onscroll = function (e) {  
+  // called when the window is scrolled. 
+    console.log(e) 
+  } 
 })
 
 

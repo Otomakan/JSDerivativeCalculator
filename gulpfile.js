@@ -81,5 +81,5 @@ gulp.task('clean-css',()=>
 	)
 
 // gulp.task
-gulp.task('default',['serve','compress','compressmath','clean-css'])
+gulp.task('default',['serve','compress','clean-css'])
 

@@ -1,7 +1,85 @@
 
+<!DOCTYPE HTML>
+
 <html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <script type="text/x-mathjax-config"> 
+    MathJax.Hub.Config({ 
+        "HTML-CSS": { scale: 200, linebreaks: { automatic: true } }, 
+        SVG: { linebreaks: { automatic:true } }, 
+        displayAlign: "left" });
+</script>
+  <link rel="stylesheet" type="text/css" href="./dist/main1.css">
+  <script src="./dist/main1.js"></script>
+ <link href="https://fonts.googleapis.com/css?family=K2D|Raleway" rel="stylesheet"> <!-- Math.js -->
+  <script src="./dist/math.js"></script>
+    <!-- D3 and Function Plot -->
+       <script src="https://unpkg.com/d3@3/d3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/function-plot/1.18.1/function-plot.js"></script>
+<link rel="icon" href="https://www.google.co.jp/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwi1pPm1rO7dAhUBWLwKHXNFCHIQjRx6BAgBEAU&url=http%3A%2F%2Fwww.my-free-mobile-images.com%2Fimages%2F&psig=AOvVaw06jWKdhchN_szCa1RQYzvt&ust=1538796121037879">
+<!-- XCalc -->
+<script type="text/javascript" src='./dist/XCalc.js'></script>
+<script type="text/javascript" src='./dist/mathSteps.js'></script>
+<!-- MathJax -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+</head>
+<header></header>
 <body>
-  <script type="text/javascript" src="./js-snippet.js"></script>
-  <div id="derivative-calculator-wrapper"></div>
-  </body>
-  <html>
+<div class='container' id='derivative-calculator-wrapper'>
+  <div class="calculator">
+    <div class="input-wrapper">
+      <div id="input-first-helper"></div>
+      <div class="input-group mb-3">
+      <input  type="text" class="form-control" id='main-input' class="math-input" type='text' value="sin(sqrt(e^x + a) / 2)" /> 
+    </div>
+      <div  id="operators">    
+        <div class="btn btn-primary btn-sm">Del</div>  
+        <div class="btn btn-primary btn-sm">+</div>
+        <div class="btn btn-primary btn-sm">-</div>
+        <div class="btn btn-primary btn-sm">×</div>
+        <div class="btn btn-primary btn-sm">÷</div>
+        <div class="btn btn-primary btn-sm">√</div>
+        <div class="btn btn-primary btn-sm">^</div>
+        <div class="btn btn-primary btn-sm">(</div>
+        <div class="btn btn-primary btn-sm">)</div>
+      </div>
+      <div class="row" id="calculator-input-button-wrapper">
+      <button id="go-button" class='btn btn-primary'> Calculate</button>
+       <button id="show-examples-button" class='btn btn-secondary'> Show Examples</button>
+       <button id='clear-all-button' class='btn btn-light'>Clear All</button>
+     </div>
+    
+    </div>
+  </div>
+  <hr/>
+  <div id="examples"></div>
+
+      <div id="results">
+        <h4>Solution</h4>
+        <div id="derivative-calculator-errors">
+        </div>
+       <div id='text-functions'>
+          <h5>Input</h5>
+          <div class="mathjax-container" id='original-function'></div>
+        <!--   <h5>Simplified</h5>
+          <div class="mathjax-container" id='original-function-simplified'></div> -->
+          <h5>Differential Rules Used </h5>
+          <div class="mathjax-container" id='steps-function'></div>
+          <h5>Chaining Rules Used</h5>
+          <div class="mathjax-container" id='rules-used'></div>
+          <h5>Result Function</h5>
+          <div class="mathjax-container" id='result-function'></div>
+          <h5>Simplified</h5>
+          <div class="mathjax-container" id='result-function-simplified'></div>
+        </div>
+          <div id='secondary-results'>
+          </div>
+        <!-- <div id="quadratic"></div> -->
+      </div>
+    </div>  
+  </div>
+</body>

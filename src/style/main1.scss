@@ -1,12 +1,24 @@
 
 @import "node_modules/bootstrap/scss/bootstrap";
 
+
+$light-grey : #575E68;
+$dark-grey :#323438;
+$light-green:#5ff475;
+$dark-green:#299939;
 $theme-colors: (
-  "primary": #0074d9,
-  "danger": #ff4136
+  "primary": $light-green,
+  "danger": $light-green
 );
+
 h5{
   font-weight: 300;
+}
+hr{
+  color: $dark-green;
+}
+body{
+  background-color: $dark-grey;
 }
 
 #derivative-calculator-wrapper {
@@ -15,8 +27,16 @@ h5{
   text-align: left;
   width:100%;
 }
-
-.calculator{
+#calculator-wrapper{
+  width:45%;
+  padding: 10px;
+  min-width: 375px;
+}
+#calculator{
+  max-width: 100%;
+  position:relative;
+  width:100%;
+  background-color: $light-grey;
 }
 
 
@@ -86,11 +106,16 @@ h5{
 }
 
 
-#results{
-  // margin:50px auto;
-  // border:1px solid #000;
-  width:100%;
+#results-wrapper{
+  padding: 10px;
+  width:45%;
   text-align: left;
+  min-width: 375px;
+}
+#result{
+  width:100%;
+  max-width: 100%;
+  background-color:$light-grey;
 }
 #rules-used{
   margin-left:1em;

@@ -29,57 +29,61 @@
 </head>
 <header></header>
 <body>
-<div class='container' id='derivative-calculator-wrapper'>
-  <div class="calculator">
-    <div class="input-wrapper">
-      <div id="input-first-helper"></div>
-      <div class="input-group mb-3">
-      <input  type="text" class="form-control" id='main-input' class="math-input" type='text' value="sin(sqrt(e^x + a) / 2)" /> 
-    </div>
-      <div  id="operators">    
-        <div class="btn btn-primary btn-sm">Del</div>  
-        <div class="btn btn-primary btn-sm">+</div>
-        <div class="btn btn-primary btn-sm">-</div>
-        <div class="btn btn-primary btn-sm">×</div>
-        <div class="btn btn-primary btn-sm">÷</div>
-        <div class="btn btn-primary btn-sm">√</div>
-        <div class="btn btn-primary btn-sm">^</div>
-        <div class="btn btn-primary btn-sm">(</div>
-        <div class="btn btn-primary btn-sm">)</div>
+<div class='container'>
+  <div class='row' id='derivative-calculator-wrapper'>
+    <div id="calculator-wrapper">
+      <div id="calculator">
+        <div id="input-first-helper"></div>
+        <div class="input-group mb-3">
+        <input  type="text" class="form-control" id='main-input' class="math-input" type='text' value="sin(sqrt(e^x + a) / 2)" /> 
       </div>
-      <div class="row" id="calculator-input-button-wrapper">
-      <button id="go-button" class='btn btn-primary'> Calculate</button>
-       <button id="show-examples-button" class='btn btn-secondary'> Show Examples</button>
-       <button id='clear-all-button' class='btn btn-light'>Clear All</button>
-     </div>
+        <div  id="operators">    
+          <div class="btn btn-primary btn-sm">Del</div>  
+          <div class="btn btn-primary btn-sm">+</div>
+          <div class="btn btn-primary btn-sm">-</div>
+          <div class="btn btn-primary btn-sm">×</div>
+          <div class="btn btn-primary btn-sm">÷</div>
+          <div class="btn btn-primary btn-sm">√</div>
+          <div class="btn btn-primary btn-sm">^</div>
+          <div class="btn btn-primary btn-sm">(</div>
+          <div class="btn btn-primary btn-sm">)</div>
+        </div>
+        <div class="row" id="calculator-input-button-wrapper">
+        <button id="go-button" class='btn btn-primary'> Calculate</button>
+         <button id="show-examples-button" class='btn btn-secondary'> Show Examples</button>
+         <button id='clear-all-button' class='btn btn-light'>Clear All</button>
+       </div>
+      <div id="examples">
+      
+    </div>
+      </div>
+    </div>
     
-    </div>
-  </div>
-  <hr/>
-  <div id="examples"></div>
 
-      <div id="results">
-        <h4>Solution</h4>
-        <div id="derivative-calculator-errors">
-        </div>
-       <div id='text-functions'>
-          <h5>Input</h5>
-          <div class="mathjax-container" id='original-function'></div>
-        <!--   <h5>Simplified</h5>
-          <div class="mathjax-container" id='original-function-simplified'></div> -->
-          <h5>Differential Rules Used </h5>
-          <div class="mathjax-container" id='steps-function'></div>
-          <h5>Chaining Rules Used</h5>
-          <div class="mathjax-container" id='rules-used'></div>
-          <h5>Result Function</h5>
-          <div class="mathjax-container" id='result-function'></div>
-          <h5>Simplified</h5>
-          <div class="mathjax-container" id='result-function-simplified'></div>
-        </div>
-          <div id='secondary-results'>
+        <div id="results-wrapper">
+          <div id="results">
+          <h4>Solution</h4>
+          <div id="derivative-calculator-errors">
           </div>
-        <!-- <div id="quadratic"></div> -->
-      </div>
-    </div>  
-  </div>
+         <div id='text-functions'>
+            <h5>Input</h5>
+            <div class="mathjax-container" id='original-function'></div>
+          <!--   <h5>Simplified</h5>
+            <div class="mathjax-container" id='original-function-simplified'></div> -->
+            <h5>Differential Rules Used </h5>
+            <div class="mathjax-container" id='steps-function'></div>
+            <h5>Chaining Rules Used</h5>
+            <div class="mathjax-container" id='rules-used'></div>
+            <h5>Result Function</h5>
+            <div class="mathjax-container" id='result-function'></div>
+            <h5>Simplified</h5>
+            <div class="mathjax-container" id='result-function-simplified'></div>
+          </div>
+            <div id='secondary-results'>
+            </div>
+          <!-- <div id="quadratic"></div> -->
+        </div>
+        </div>
+      </div>  
+    </div>
 </body>
