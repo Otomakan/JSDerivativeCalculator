@@ -2,7 +2,7 @@
 @import "node_modules/bootstrap/scss/bootstrap";
 
 
-$light-grey : #575E68;
+$light-grey : #E5E7E8;
 $dark-grey :#323438;
 $light-green:#5ff475;
 $dark-green:#299939;
@@ -18,7 +18,7 @@ hr{
   color: $dark-green;
 }
 body{
-  background-color: $dark-grey;
+  background-color: white;
 }
 
 #derivative-calculator-wrapper {
@@ -36,7 +36,6 @@ body{
   max-width: 100%;
   position:relative;
   width:100%;
-  background-color: $light-grey;
 }
 
 
@@ -46,35 +45,61 @@ body{
 }
 #operators{
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
-  align-items: left;
-  justify-content: left;
+  align-items: center;
+  justify-content: center;
           transition: all .4s ease-in-out;
+  div{
+    flex: 1 1 auto;
+    margin:0 0.2em;
+}
 }
 
-#operators div{
-  margin:0 0.2em;
-}
 
-#show-examples-button{
-}
+
 #calculator-input-button-wrapper{
-  margin:20px 0;
+  margin:10px 0;
+    display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  width:100%;
+  // margin:20px 0;
    button{
-  margin-right: 30px;
+    width:90%;
+    margin:10px 0;
+    text-align: center;
+   }
+   #show-examples-button{
+    width:100%
+  }
+   #wrap-right-cal-button{
+    width:50%;
+    text-align: right;
+   }
+   #wrap-left-cal-button{
+    width:50%;
+    text-align: left;
    }
 }
+
+
 #examples{
-  display: none;
+
+  justify-content: space-between;
+  flex-wrap: wrap;
   margin: 10px 0;
   align-items: center;
   visibility: hidden;
   opacity: 0;
-  justify-content: center;
-     -webkit-transition: all 1s linear;
-    -moz-transition: all 1s linear;
-    -o-transition: all 1s linear;
-    transition: all 1s linear;
+    .example{
+      // font-size: 18px;
+      flex:1 1 auto;
+      // padding: 2px 5px;
+      margin:3px 3px;
+    }
 }
 #examples.show{
   visibility: visible;
@@ -82,23 +107,37 @@ body{
   display: flex;
   flex-wrap: wrap;
 }
-#examples .example{
-  font-size: 18px;
-  padding: 2px 5px;
-  border:1px solid black;
-  cursor: pointer;  
-  margin:3px 3px;
-      -webkit-transition: all .4s ease-in-out;
-     -moz-transition: all .4s ease-in-out;
-      -ms-transition: all .4s ease-in-out;
-       -o-transition: all .4s ease-in-out;
-}
+
 #examples .example:hover{
   background-color: #000;
   color:#fff;
 }
 .mathjax-container{
   overflow-x:scroll;
+  border-radius: .25rem;
+  min-height: 100px;
+  text-align: center;
+  padding: 10px,15px;
+  margin: 1.5em 0;
+}
+.results-mini-container{
+
+  background-color: $light-grey;
+  border-radius: .25rem;
+  min-height: 100px;
+  text-align: center;
+  padding: 10px,15px;
+  margin: 1.5em 0;
+   hr{
+      border:1.2px solid white;
+      width:90%;
+   }
+   h5{
+
+      padding-top: 10px;
+      margin-left:20px;
+    text-align: left;
+   }
 }
 .MJXc-display{ 
     text-align: center !important;
@@ -118,8 +157,15 @@ body{
   background-color:$light-grey;
 }
 #rules-used{
-  margin-left:1em;
-  margin-bottom: 2em;
+  // margin-left:1em;
+  // margin-bottom: 2em;
+}
+#calculator-add-space{
+  height: 300px;
+  width:300px;
+  text-align: center;
+  margin:auto;
+  background-color: $light-grey;
 }
 #derivative-calculator-errors{
   color:red;

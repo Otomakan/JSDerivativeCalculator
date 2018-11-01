@@ -64,7 +64,7 @@ ready(function(){
   //Put the examples from the example list into the input field
   for (var i =0; i<exampleList.length-1;i++){
     var onClickString = "document.getElementById('main-input').value='"+exampleList[i].replace(/\s/g, "")+"';"+"document.getElementById('original-function').innerHTML=laTeXed('"+exampleList[i].replace(/ /g,'')+"');"+"MathJax.Hub.Queue(['Typeset',MathJax.Hub,document.getElementById('original-function')]);";
-    examplesDiv.innerHTML += "<div id='ex"+i+"' onclick="+onClickString+" class='example'>"+exampleList[i]+"</div>";
+    examplesDiv.innerHTML += "<div id='ex"+i+"' onclick="+onClickString+" class='btn btn-primary btn-sm example'>"+exampleList[i]+"</div>";
     //Adds the example in the result section
     document.getElementById('ex'+i).onclick=function(){
     document.getElementById('main-input').value+=this.innerHTML.replace(/\s/g, "");
@@ -155,13 +155,13 @@ ready(function(){
 
     //VISUAL COMPONENTS
   //Handling events due to scrolling
-    window.onscroll = function (e) {  
+    // window.onscroll = function (e) {  
     // called when the window is scrolled. 
       // console.log(e)
-    document.getElementById('calculator').style.top = ((window.pageYOffset || window.scrollTop)/16) - (window.clientTop || 0)+ 5 +'em'
-     document.getElementById('calculator').style.position = 'relative'
+    // document.getElementById('calculator').style.top = ((window.pageYOffset || window.scrollTop)/16) - (window.clientTop || 0)+ 5 +'em'
+    //  document.getElementById('calculator').style.position = 'relative'
       
-    } 
+    // } 
 })
 
 
@@ -397,7 +397,7 @@ var setResultHTML = function(originalFunction, resultFunction){
   // fireMathJax()
   var nextFunctionBtn = document.createElement("BUTTON");
   nextFunctionBtn.setAttribute('id','next-derivative');
-  nextFunctionBtn.classList.add('btn');
+  nextFunctionBtn.classList.add('btn btn-primary');
   nextFunctionBtn.classList.add('btn-dark');
   nextFunctionBtn.innerHTML="Next derivative";
   nextFunctionBtn.onclick = function(){

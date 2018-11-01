@@ -36,7 +36,7 @@
         <div id="input-first-helper"></div>
         <div class="input-group mb-3">
         <input  type="text" class="form-control" id='main-input' class="math-input" type='text' value="sin(sqrt(e^x + a) / 2)" /> 
-      </div>
+        </div>
         <div  id="operators">    
           <div class="btn btn-primary btn-sm">Del</div>  
           <div class="btn btn-primary btn-sm">+</div>
@@ -48,15 +48,21 @@
           <div class="btn btn-primary btn-sm">(</div>
           <div class="btn btn-primary btn-sm">)</div>
         </div>
-        <div class="row" id="calculator-input-button-wrapper">
-        <button id="go-button" class='btn btn-primary'> Calculate</button>
-         <button id="show-examples-button" class='btn btn-secondary'> Show Examples</button>
-         <button id='clear-all-button' class='btn btn-light'>Clear All</button>
-       </div>
-      <div id="examples">
-      
-    </div>
+        <div  id="calculator-input-button-wrapper">
+          <div id='wrap-left-cal-button'>
+        <button id="go-button" class='btn btn-primary'> Calculate</button> 
       </div>
+      <div id='wrap-right-cal-button'>
+         <button id='clear-all-button' class='btn  btn-primary'>Clear All</button>
+       </div>
+        
+
+        <button id="show-examples-button"  class='btn btn-block btn-primary'> Show Examples</button>
+       </div>
+        <div id="examples">
+        </div>
+      </div>
+      <div id="calculator-add-space"></div>
     </div>
     
 
@@ -65,19 +71,34 @@
           <h4>Solution</h4>
           <div id="derivative-calculator-errors">
           </div>
-         <div id='text-functions'>
-            <h5>Input</h5>
-            <div class="mathjax-container" id='original-function'></div>
-          <!--   <h5>Simplified</h5>
-            <div class="mathjax-container" id='original-function-simplified'></div> -->
-            <h5>Differential Rules Used </h5>
-            <div class="mathjax-container" id='steps-function'></div>
-            <h5>Chaining Rules Used</h5>
-            <div class="mathjax-container" id='rules-used'></div>
-            <h5>Result Function</h5>
-            <div class="mathjax-container" id='result-function'></div>
-            <h5>Simplified</h5>
-            <div class="mathjax-container" id='result-function-simplified'></div>
+          <div id='text-functions'>
+            <div class="results-mini-container">
+              <h5>Input</h5> 
+              <hr/>
+              <div class="mathjax-container" id='original-function'></div>
+            </div>
+            <!--   <h5>Simplified</h5>
+              <div class="mathjax-container" id='original-function-simplified'></div> -->
+
+            <div class="results-mini-container">
+              <h5>Differential Rules Used </h5> <hr/>
+              <div class="mathjax-container" id='steps-function'></div>
+            </div>
+
+            <div class="results-mini-container">
+              <h5>Chaining Rules Used</h5> <hr/>
+              <div class="mathjax-container" id='rules-used'></div>
+            </div>
+
+            <div class="results-mini-container">
+              <h5>Result Function</h5> <hr/>
+              <div class="mathjax-container" id='result-function'></div>
+            </div>
+
+            <div class="results-mini-container">
+              <h5>Simplified</h5> <hr/>
+              <div class="mathjax-container" id='result-function-simplified'></div>
+            </div>
           </div>
             <div id='secondary-results'>
             </div>
