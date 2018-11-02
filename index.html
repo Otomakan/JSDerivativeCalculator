@@ -29,13 +29,36 @@
 </head>
 <header></header>
 <body>
+<nav id="navigation-bar" class="navbar navbar-expand-lg navbar-light bg-primary">
+  <hr id='navbar-bar'/>
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Practice <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Examples</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Help</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 <div class='container'>
   <div class='row' id='derivative-calculator-wrapper'>
+
     <div id="calculator-wrapper">
+
+          <h4>Calculate the Derivative of...</h4>
       <div id="calculator">
         <div id="input-first-helper"></div>
         <div class="input-group mb-3">
-        <input  type="text" class="form-control" id='main-input' class="math-input" type='text' value="sin(sqrt(e^x + a) / 2)" /> 
+        <input  type="text" class="form-control" id='main-input' class="math-input" type='text' value="Enter Derivative" /> 
         </div>
         <div  id="operators">    
           <div class="btn btn-primary btn-sm">Del</div>  
@@ -57,12 +80,30 @@
        </div>
         
 
-        <button id="show-examples-button"  class='btn btn-block btn-primary'> Show Examples</button>
+        <button id="show-examples-button" class='btn btn-primary'> Show Examples</button>
        </div>
         <div id="examples">
         </div>
       </div>
-      <div id="calculator-add-space"></div>
+      <div id="calculator-ad-space">I am an ad</div>
+      <div id="about-box">
+        <div id="about-box-titles-wrapper">
+          <div class="about-box-title">About<hr id="selected-title"/><hr/></div>
+          <div class="about-box-title">Help<hr/></div>
+          <div class="about-box-title">Options<hr/></div>
+          <div class="about-box-title">Practice<hr/></div>
+          <div id="about-box-content">The Derivative Calculator lets you calculate derivatives of functions online — for free!
+
+          Our calculator allows you to check your solutions to calculus exercises. It helps you practice by showing you the full working (step by step differentiation).
+
+          The Derivative Calculator supports computing first, second, …, fifth derivatives as well as differentiating functions with many variables (partial derivatives), implicit differentiation and calculating roots/zeros. You can also check your answers! Interactive graphs/plots help visualize and better understand the functions.
+
+          For more about how to use the Derivative Calculator, go to "Help" or take a look at the examples.
+
+          And now: Happy differentiating!
+          </div>
+        </div>
+      </div>
     </div>
     
 
@@ -106,5 +147,8 @@
         </div>
         </div>
       </div>  
+      <div id="bottom-ad-space">
+        Last ad!
+      </div>
     </div>
 </body>

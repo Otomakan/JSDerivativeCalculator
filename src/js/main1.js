@@ -30,7 +30,7 @@ ready(function(){
   // Prepopulate the calculator
   try{
       var inputEl = document.getElementById("main-input");// Equal button
-      var originalFunction = inputEl.value;
+      var originalFunction = "sin(sqrt(e^x + a) / 2)"
       originalFunction = inputFirstParser(originalFunction);
       //Calculate the derivative
       var resultFunction = getDerivative(originalFunction,resultFunction);
@@ -162,6 +162,41 @@ ready(function(){
     //  document.getElementById('calculator').style.position = 'relative'
       
     // } 
+    //Changing the about box content
+    let allTitles = document.getElementsByClassName('about-box-title')
+    for (let i = 0; i<allTitles.length;i++){
+
+      let title =  allTitles[i]
+      let titleName = title.innerHTML.match(/^([^<]*)/g)
+      let selectedTitleBar = document.getElementById("selected-title")
+      let aboutContent = document.getElementById("about-box-content")
+      if(i==0)
+        selectedTitleBar.style.left = title.getBoundingClientRect().left +'px'
+      title.onclick=(e)=>{
+        selectedTitleBar.style.cssText = "left:"+  title.getBoundingClientRect().left +'px'
+        let content = ""
+        console.log(titleName )
+          switch(titleName[0]){
+            case "Help":
+              content = "Help Me"
+              break
+            case "Options":
+              content = "Here are some Options"
+              break
+            case "Practice":
+              content = "Practice with me"
+              break
+            default:
+              content = "Calculator lets you calculate derivatives of functions online \u2014 for free!\r\n\r\n          Our calculator allows you to check your solutions to calculus exercises. It helps you practice by showing you the full working (step by step differentiation).\r\n\r\n          The Derivative Calculator supports computing first, second, \u2026, fifth derivatives as well as differentiating functions with many variables (partial derivatives), implicit differentiation and calculating roots\/zeros. You can also check your answers! Interactive graphs\/plots help visualize and better understand the functions.\r\n\r\n          For more about how to use the Derivative Calculator, go to \"Help\" or take a look at the examples.\r\n\r\n          And now: Happy differentiating!"
+              break
+            }
+            aboutContent.innerHTML = content
+        }
+    }
+    //Set hr bar middle
+    let navbarBar = document.getElementById('navbar-bar')
+    // navbarBar.style.cssText = "top"+document.getElementById('navigation-bar').getBoundingClientRect().top 'px;'
+    navbarBar.style.cssText = "visibility:visible;"
 })
 
 
@@ -397,8 +432,8 @@ var setResultHTML = function(originalFunction, resultFunction){
   // fireMathJax()
   var nextFunctionBtn = document.createElement("BUTTON");
   nextFunctionBtn.setAttribute('id','next-derivative');
-  nextFunctionBtn.classList.add('btn btn-primary');
-  nextFunctionBtn.classList.add('btn-dark');
+  nextFunctionBtn.classList.add('btn');
+  nextFunctionBtn.classList.add('btn-primary');
   nextFunctionBtn.innerHTML="Next derivative";
   nextFunctionBtn.onclick = function(){
     try{

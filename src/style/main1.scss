@@ -6,42 +6,86 @@ $light-grey : #E5E7E8;
 $dark-grey :#323438;
 $light-green:#5ff475;
 $dark-green:#299939;
+$main-blue: #2583FC;
+$box-border-radius: 0.25rem;
 $theme-colors: (
-  "primary": $light-green,
+  "primary": $main-blue,
   "danger": $light-green
 );
 
+h4{
+  font-weight: 300;
+}
 h5{
   font-weight: 300;
 }
 hr{
-  color: $dark-green;
 }
 body{
   background-color: white;
 }
+nav{
+  background-color: $main-blue;
+  color:white !important;
+}
+.navbar-light .navbar-brand {
+    color: white;
+}
+
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+    color: white;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: white;
+}
+.navbar-nav{
+  li{
+    background-color: $main-blue;
+    z-index: 1000;
+  }
+}
+.navbar-brand{
+  background-color: $main-blue;
+  z-index: 1000;
+}
+
+#navbar-bar{
+  padding: 0;
+  margin:0;
+  width:90%;
+  // display: none;
+  position:absolute;
+  visibility: hidden;
+  border:solid white 1px;
+}
 
 #derivative-calculator-wrapper {
   margin: 0;
-  padding: 5em 3em ;
+  // padding: 5em 3em ;
   text-align: left;
   width:100%;
 }
 #calculator-wrapper{
-  width:45%;
+  width:50%;
   padding: 10px;
   min-width: 375px;
 }
 #calculator{
+  background-color: $light-grey;
   max-width: 100%;
   position:relative;
   width:100%;
+  padding:10px;
+  border-radius: $box-border-radius;
 }
 
 
 #input-first-helper{
   color:red;  
   position: absolute;
+}
+#main-input{
+  color: $main-blue;
 }
 #operators{
   display: flex;
@@ -92,7 +136,7 @@ body{
   flex-wrap: wrap;
   margin: 10px 0;
   align-items: center;
-  visibility: hidden;
+  display: none;
   opacity: 0;
     .example{
       // font-size: 18px;
@@ -112,13 +156,52 @@ body{
   background-color: #000;
   color:#fff;
 }
+
+#about-box{
+  width:100%;
+  background-color: $light-grey;
+  #about-box-titles-wrapper{
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    .about-box-title{
+      width:25%;
+      min-width: 25%;
+      text-align: center;
+      hr{
+        width:100%;
+        border-color:$light-grey;
+        // tran
+      }
+      #selected-title{
+        cursor:pointer;
+        position:absolute;
+        border-color:$main-blue;
+        width:10%;
+        transition:  0.3s;
+        left:0;
+      }
+    }
+    #about-box-content{
+      background-color: $light-grey;
+      border-radius: $box-border-radius;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+}
+
+
 .mathjax-container{
   overflow-x:scroll;
   border-radius: .25rem;
   min-height: 100px;
   text-align: center;
-  padding: 10px,15px;
-  margin: 1.5em 0;
+  // padding: 10px,15px;
+  margin: 0;
 }
 .results-mini-container{
 
@@ -133,7 +216,6 @@ body{
       width:90%;
    }
    h5{
-
       padding-top: 10px;
       margin-left:20px;
     text-align: left;
@@ -147,7 +229,7 @@ body{
 
 #results-wrapper{
   padding: 10px;
-  width:45%;
+  width:50%;
   text-align: left;
   min-width: 375px;
 }
@@ -160,11 +242,11 @@ body{
   // margin-left:1em;
   // margin-bottom: 2em;
 }
-#calculator-add-space{
+#calculator-ad-space{
   height: 300px;
   width:300px;
   text-align: center;
-  margin:auto;
+  margin:30px auto;
   background-color: $light-grey;
 }
 #derivative-calculator-errors{
@@ -178,4 +260,9 @@ body{
 }
 #quadratic{
   background:white;
+}
+#bottom-ad-space{
+  background-color: $light-grey;
+  width:70%;
+  height:150px;
 }
