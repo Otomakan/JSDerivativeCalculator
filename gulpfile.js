@@ -9,8 +9,8 @@ const sass = require('gulp-sass');
 const browserify = require('browserify')
 const buffer = require('vinyl-buffer')
 const transform = require('vinyl-transform')
-
-var source = require('vinyl-source-stream');
+const concat = require('gulp-concat');
+const source = require('vinyl-source-stream');
 const AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
   'ie_mob >= 10',
@@ -35,7 +35,8 @@ gulp.task('serve', function() {
 
 })
 gulp.task('compress', ()=>
-        gulp.src('src/js/main1.js')
+        gulp.src('src/js/*.js')
+          .pipe(concat('bundle.js'))
          .pipe(babel({
             presets: ['@babel/env']
         }))

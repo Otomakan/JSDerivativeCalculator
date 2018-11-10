@@ -33,3 +33,5 @@ same for asec ad all the a family probly
 x ^ (-1/3) This doesn't work
 
 Line 43107 created a custom erf function, The problem is that it uses ln and pi which are converted to numbers
+
+Have to figure out root(x+1,7) getting weird intermediate value error

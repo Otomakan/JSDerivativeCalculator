@@ -3,83 +3,149 @@
 
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <script type="text/x-mathjax-config"> 
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width'>
+  <script type='text/x-mathjax-config'> 
     MathJax.Hub.Config({ 
-        "HTML-CSS": { scale: 200, linebreaks: { automatic: true } }, 
+        'HTML-CSS': { scale: 200, linebreaks: { automatic: true } }, 
         SVG: { linebreaks: { automatic:true } }, 
-        displayAlign: "left" });
+        displayAlign: 'left' });
 </script>
-  <link rel="stylesheet" type="text/css" href="./dist/main1.css">
-  <script src="./dist/main1.js"></script>
- <link href="https://fonts.googleapis.com/css?family=K2D|Raleway" rel="stylesheet"> <!-- Math.js -->
-  <script src="./dist/math.js"></script>
+  <link rel='stylesheet' type='text/css' href='./dist/main1.css'>
+  <script src='./dist/main1.js'></script>
+ <link href='https://fonts.googleapis.com/css?family=K2D|Raleway' rel='stylesheet'> <!-- Math.js -->
+  <script src='./dist/math.js'></script>
     <!-- D3 and Function Plot -->
-       <script src="https://unpkg.com/d3@3/d3.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/function-plot/1.18.1/function-plot.js"></script>
-<link rel="icon" href="https://www.google.co.jp/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwi1pPm1rO7dAhUBWLwKHXNFCHIQjRx6BAgBEAU&url=http%3A%2F%2Fwww.my-free-mobile-images.com%2Fimages%2F&psig=AOvVaw06jWKdhchN_szCa1RQYzvt&ust=1538796121037879">
+       <script src='https://unpkg.com/d3@3/d3.min.js'></script>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/function-plot/1.18.1/function-plot.js'></script>
+<link rel='icon' href='https://www.google.co.jp/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwi1pPm1rO7dAhUBWLwKHXNFCHIQjRx6BAgBEAU&url=http%3A%2F%2Fwww.my-free-mobile-images.com%2Fimages%2F&psig=AOvVaw06jWKdhchN_szCa1RQYzvt&ust=1538796121037879'>
 <!-- XCalc -->
-<script type="text/javascript" src='./dist/XCalc.js'></script>
-<script type="text/javascript" src='./dist/mathSteps.js'></script>
+<script type='text/javascript' src='./dist/XCalc.js'></script>
+<script type='text/javascript' src='./dist/mathSteps.js'></script>
 <!-- MathJax -->
-<script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<script type='text/javascript' async
+  src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 </head>
 <header></header>
 <body>
-<div class='container' id='derivative-calculator-wrapper'>
-  <div class="calculator">
-    <div class="input-wrapper">
-      <div id="input-first-helper"></div>
-      <div class="input-group mb-3">
-      <input  type="text" class="form-control" id='main-input' class="math-input" type='text' value="sin(sqrt(e^x + a) / 2)" /> 
-    </div>
-      <div  id="operators">    
-        <div class="btn btn-primary btn-sm">Del</div>  
-        <div class="btn btn-primary btn-sm">+</div>
-        <div class="btn btn-primary btn-sm">-</div>
-        <div class="btn btn-primary btn-sm">×</div>
-        <div class="btn btn-primary btn-sm">÷</div>
-        <div class="btn btn-primary btn-sm">√</div>
-        <div class="btn btn-primary btn-sm">^</div>
-        <div class="btn btn-primary btn-sm">(</div>
-        <div class="btn btn-primary btn-sm">)</div>
-      </div>
-      <div class="row" id="calculator-input-button-wrapper">
-      <button id="go-button" class='btn btn-primary'> Calculate</button>
-       <button id="show-examples-button" class='btn btn-secondary'> Show Examples</button>
-       <button id='clear-all-button' class='btn btn-light'>Clear All</button>
-     </div>
-    
-    </div>
-  </div>
-  <hr/>
-  <div id="examples"></div>
+<nav class='navbar navbar-expand-lg navbar-light'>
+  <a class='navbar-brand' href='#'><img src='./calculator-logo.png'/></a>
+  <hr id='navbar-bar'/>
 
-      <div id="results">
-        <h4>Solution</h4>
-        <div id="derivative-calculator-errors">
-        </div>
-       <div id='text-functions'>
-          <h5>Input</h5>
-          <div class="mathjax-container" id='original-function'></div>
-        <!--   <h5>Simplified</h5>
-          <div class="mathjax-container" id='original-function-simplified'></div> -->
-          <h5>Differential Rules Used </h5>
-          <div class="mathjax-container" id='steps-function'></div>
-          <h5>Chaining Rules Used</h5>
-          <div class="mathjax-container" id='rules-used'></div>
-          <h5>Result Function</h5>
-          <div class="mathjax-container" id='result-function'></div>
-          <h5>Simplified</h5>
-          <div class="mathjax-container" id='result-function-simplified'></div>
-        </div>
-          <div id='secondary-results'>
-          </div>
-        <!-- <div id="quadratic"></div> -->
-      </div>
-    </div>  
+  <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNavAltMarkup' aria-controls='navbarNavAltMarkup' aria-expanded='false' aria-label='Toggle navigation'>
+    <span class='navbar-toggler-icon'></span>
+  </button>
+  <div class='collapse navbar-collapse' id='navbarNavAltMarkup'>
+    <div class='navbar-nav'>
+      <a class='nav-item nav-link' href='#'>Home </a>
+      <a class='nav-item nav-link' href='#'>Features</a>
+      <a class='nav-item nav-link' href='#'>Pricing</a>
+     </a>
+    </div>
   </div>
+</nav>
+
+<div class='container'>
+  <div class='row' id='derivative-calculator-wrapper'>
+
+    <div id='calculator-wrapper'>
+
+          <h4>Calculate the Derivative of...</h4>
+      <div id='calculator'>
+        <div id='input-first-helper'></div>
+        <div class='input-group mb-3'>
+        <input  type='text' class='form-control' id='main-input' class='math-input' type='text' placeholder='Enter Derivative' /> 
+        </div>
+        <div  id='operators'>    
+          <div class='btn btn-primary btn-sm'>Del</div>  
+          <div class='btn btn-primary btn-sm'>+</div>
+          <div class='btn btn-primary btn-sm'>-</div>
+          <div class='btn btn-primary btn-sm'>×</div>
+          <div class='btn btn-primary btn-sm'>÷</div>
+          <div class='btn btn-primary btn-sm'>√</div>
+          <div class='btn btn-primary btn-sm'>^</div>
+          <div class='btn btn-primary btn-sm'>(</div>
+          <div class='btn btn-primary btn-sm'>)</div>
+        </div>
+        <div  id='calculator-input-button-wrapper'>
+          <div id='wrap-left-cal-button'>
+        <button id='go-button' class='btn btn-primary'> Calculate</button> 
+      </div>
+      <div id='wrap-right-cal-button'>
+         <button id='clear-all-button' class='btn  btn-primary'>Clear All</button>
+       </div>
+        
+
+        <button id='show-examples-button' class='btn btn-primary'> Show Examples</button>
+       </div>
+        <div id='examples'>
+        </div>
+      </div>
+      <div id='calculator-ad-space'>I am an ad</div>
+      <div id='about-box'>
+        <div id='about-box-titles-wrapper'>
+          <div class='about-box-title'>About<hr id='selected-title'/><hr/></div>
+          <div class='about-box-title'>Help<hr/></div>
+          <div class='about-box-title'>Options<hr/></div>
+          <div class='about-box-title'>Practice<hr/></div>
+          <div id='about-box-content'>The Derivative Calculator lets you calculate derivatives of functions online — for free!
+
+          Our calculator allows you to check your solutions to calculus exercises. It helps you practice by showing you the full working (step by step differentiation).
+
+          The Derivative Calculator supports computing first, second, …, fifth derivatives as well as differentiating functions with many variables (partial derivatives), implicit differentiation and calculating roots/zeros. You can also check your answers! Interactive graphs/plots help visualize and better understand the functions.
+
+          For more about how to use the Derivative Calculator, go to 'Help' or take a look at the examples.
+
+          And now: Happy differentiating!
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+        <div id='results-wrapper'>
+          <div id='results'>
+          <h4>Solution</h4>
+          <div id='derivative-calculator-errors'>
+          </div>
+          <div id='text-functions'>
+            <div class='results-mini-container'>
+              <h5>Input</h5> 
+              <hr/>
+              <div class='mathjax-container' id='original-function'></div>
+            </div>
+            <!--   <h5>Simplified</h5>
+              <div class='mathjax-container' id='original-function-simplified'></div> -->
+
+            <div class='results-mini-container'>
+              <h5>Differential Rules Used </h5> <hr/>
+              <div class='mathjax-container' id='steps-function'></div>
+            </div>
+
+            <div class='results-mini-container'>
+              <h5>Chaining Rules Used</h5> <hr/>
+              <div class='mathjax-container' id='rules-used'></div>
+            </div>
+
+            <div class='results-mini-container'>
+              <h5>Result Function</h5> <hr/>
+              <div class='mathjax-container' id='result-function'></div>
+            </div>
+
+            <div class='results-mini-container'>
+              <h5>Simplified</h5> <hr/>
+              <div class='mathjax-container' id='result-function-simplified'></div>
+            </div>
+          </div>
+            <div id='secondary-results'>
+            </div>
+          <!-- <div id='quadratic'></div> -->
+        </div>
+        </div>
+      </div>  
+      <div id='bottom-ad-space'>
+        Last ad!
+      </div>
+    </div>
 </body>

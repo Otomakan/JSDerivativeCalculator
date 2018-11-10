@@ -86,25 +86,25 @@ ready(function(){
   //End 'show-examples-button').onclick
 
   //Listen to Changes to the input
-  var mainInput =  document.getElementById('main-input');
-  mainInput.addEventListener('input', function(e){
-    mainInput.value = this.value.toLowerCase();
-    var helper = document.getElementById('input-first-helper');
-    try{
-      helper.innerHTML = "";
-     document.getElementById('original-function').innerHTML= laTeXed(this.value.replace(/ /g,'')); 
-     mainInput.classList.remove('not-ready');
-    }
-    catch(err){
-      mainInput.classList.add('not-ready');
-      var coordinates = mainInput.getBoundingClientRect();
+  // var mainInput =  document.getElementById('main-input');
+  // mainInput.addEventListener('input', function(e){
+  //   mainInput.value = this.value.toLowerCase();
+  //   var helper = document.getElementById('input-first-helper');
+  //   try{
+  //     helper.innerHTML = "";
+  //    document.getElementById('original-function').innerHTML= laTeXed(this.value.replace(/ /g,'')); 
+  //    mainInput.classList.remove('not-ready');
+  //   }
+  //   catch(err){
+  //     mainInput.classList.add('not-ready');
+  //     var coordinates = mainInput.getBoundingClientRect();
       
-      helper.style.cssText = "top:"+(coordinates.y-20)+"px;left:"+coordinates.x+"px;";
-      helper.innerHTML= parseErrorType(err.toString());
-    }
+  //     helper.style.cssText = "top:"+(coordinates.y-20)+"px;left:"+coordinates.x+"px;";
+  //     helper.innerHTML= parseErrorType(err.toString());
+  //   }
 
-      MathJax.Hub.Queue(["Typeset",MathJax.Hub,document.getElementById('original-function')]);
-  })
+  //     MathJax.Hub.Queue(["Typeset",MathJax.Hub,document.getElementById('original-function')]);
+  // })
 
   //Calculate the derivative after the Calculate Button is clicked
   goButton.onclick = function(){
@@ -151,6 +151,8 @@ ready(function(){
   document.getElementById('clear-all-button').onclick=()=>{
     document.getElementById('main-input').value = '';
   }
+
+
   //End clear-all-button
 
     //VISUAL COMPONENTS
@@ -197,8 +199,43 @@ ready(function(){
     let navbarBar = document.getElementById('navbar-bar')
     // navbarBar.style.cssText = "top"+document.getElementById('navigation-bar').getBoundingClientRect().top 'px;'
     navbarBar.style.cssText = "visibility:visible;"
-})
+    //Imitate Bootstrap show without important the whole library
+    let contentNav = document.getElementById('navbarNavAltMarkup')
+    let buttonNav = document.getElementsByClassName('navbar-toggler')[0]
+    let navBarNav = document.getElementsByClassName('navbar-nav')[0]
+    let aboutBox = document.getElementById('about-box')
+    let show = false
+    
+    console.log('fdsfsdfs')
+    buttonNav.onclick=(()=>{
+      show = !show
 
+      //Check the status of the show variable and add or remove show class accordingly
+      if(show){
+        contentNav.classList.add('show')
+        navBarNav.classList.add('show')
+      }
+      else{
+        contentNav.classList.remove('show')
+        navBarNav.classList.remove('show')
+      }
+    })
+
+    //Copy paste buttons
+    // let copyButtons = document.getElementsByClassName('copy-button')
+    // for(let i=0;i< copyButtons.length;i++){
+    //   copyButtons[i].onclick=()=>{
+    //     console.log(copyButtons[i])
+    //     let equationsWrapper = copyButtons[i].parentElement.getElementsByTagName('script')
+
+    //     let equations = ""
+    //     for (let ii=0 ; ii<equationsWrapper.length;ii++){
+    //       equations = equations.concat(unTex(equationsWrapper[ii].innerHTML)+'\n')
+    //     }
+    //     console.log(equations)
+    //   }
+    // }
+})
 
 // }
   //Parser Convert to human language
@@ -420,6 +457,21 @@ var setResultHTML = function(originalFunction, resultFunction){
   document.getElementById('result-function-simplified').innerHTML = laTeXed(resultSimplified);
   
 
+  let copyButton = document.createElement("div")
+  copyButton.classList.add('copy-button')
+  copyButton.innerHTML = svgClipboard
+  document.getElementById('result-function').appendChild(copyButton)
+  //Allow a copy of the result
+  copyButton.onclick = ()=>{
+    copyText(resultFunction)
+  }
+  copyButton = document.createElement("div")
+  copyButton.classList.add('copy-button')
+  copyButton.innerHTML = svgClipboard
+  document.getElementById('result-function-simplified').appendChild(copyButton)  
+  copyButton.onclick = ()=>{
+    copyText(resultSimplified)
+  }
   for(let x=0;x<derivationMethod.length;x++){
     document.getElementById('steps-function').innerHTML += LaTexDeriv(derivationMethod[x]);
   }
@@ -457,9 +509,10 @@ var setResultHTML = function(originalFunction, resultFunction){
   document.getElementById('results').appendChild(nextFunctionBtn);
 }
 
-var appendResultHTML = function(originalFunction, resultFunction, iteration){
-  var newResult = document.createElement("div");
-  var newResultTitle = document.createElement("h5")
+let appendResultHTML = function(originalFunction, resultFunction, iteration){
+  let newResult = document.createElement("div");
+  let newResultTitle = document.createElement("h5")
+  let copyButton = document.createElement("div")
   switch(iteration){
     case 2:
       newResultTitle.innerHTML = "2nd derivative"
@@ -472,14 +525,22 @@ var appendResultHTML = function(originalFunction, resultFunction, iteration){
   }
 
   newResult.setAttribute('id','derivative-result-'+iteration);
-  newResultTitle.classList.add('secondary-derivative-result-title');
-  newResult.classList.add('secondary-derivative-result');
+  newResultTitle.classList.add('secondary-derivative-result-title')
+  newResult.classList.add('results-mini-container')
+  newResult.classList.add('secondary-derivative-result')
+  copyButton.classList.add('copy-button')
+  copyButton.innerHTML = svgClipboard
+    // Add functionality to the copy button to copy the result
+  copyButton.onclick = ()=>{
+    copyText(resultFunction)
+  }
 
-  newResult.classList.add('mathjax-container');
+  newResult.classList.add('mathjax-container')
   newResult.innerHTML = laTeXed(resultFunction.replace(/ /g,''))
   // nextFunctionBtn.setAttribute('id','next-derivative');
   document.getElementById('secondary-results').appendChild(newResultTitle)
   document.getElementById('secondary-results').appendChild(newResult)
+    newResult.appendChild(copyButton)
   // console.log("originalFunction is " + originalFunction);
   // console.log("result function is " + resultFunction);
   // Check how many derivative ups we calculated if iteration is < 5 then we allow for the calculation of a new derivative.
@@ -528,6 +589,26 @@ var parseErrorType = function(str){
           return str;
         }
 }
+
+
+// Dirty from https://techoverflow.net/2018/03/30/copying-strings-to-the-clipboard-using-pure-javascript/
+const copyText = (str)=> {
+   // Create new element
+   var el = document.createElement('textarea');
+   // Set value (string to be copied)
+   el.value = str;
+   // Set non-editable to avoid focus and move outside of view
+   el.setAttribute('readonly', '');
+   el.style = {position: 'absolute', left: '-9999px'};
+   document.body.appendChild(el);
+   // Select text inside element
+   el.select();
+   // Copy text to clipboard
+   document.execCommand('copy');
+   // Remove temporary element
+   document.body.removeChild(el);
+}
+
 //SPECIAL STRING SPLICER
 // Takes in 3 arguments, 
 //{expression}the expression you are trying to check
@@ -550,6 +631,9 @@ if (!String.prototype.splice) {
         return this.slice(0, start) + newSubStr + this.slice(start + Math.abs(delCount));
     };
 }
+
+
+let svgClipboard = '<svg aria-hidden="true" data-prefix="far" data-icon="clipboard" class="svg-inline--fa fa-clipboard fa-w-12" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path color="white" stroke="#fff" fill="currentColor" d="M336 64h-80c0-35.29-28.71-64-64-64s-64 28.71-64 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h288c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm-6 400H54a6 6 0 0 1-6-6V118a6 6 0 0 1 6-6h42v36c0 6.627 5.373 12 12 12h168c6.627 0 12-5.373 12-12v-36h42a6 6 0 0 1 6 6v340a6 6 0 0 1-6 6zM192 40c13.255 0 24 10.745 24 24s-10.745 24-24 24-24-10.745-24-24 10.745-24 24-24"></path></svg>'
 
 
     

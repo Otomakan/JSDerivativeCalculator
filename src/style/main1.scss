@@ -1,5 +1,4 @@
 
-@import "node_modules/bootstrap/scss/bootstrap";
 
 
 $light-grey : #E5E7E8;
@@ -9,10 +8,26 @@ $dark-green:#299939;
 $main-blue: #2583FC;
 $box-border-radius: 0.25rem;
 $theme-colors: (
-  "primary": $main-blue,
+  "primary":$main-blue,
   "danger": $light-green
 );
 
+$navbar-light-color: white;
+$navbar-light-background-color: $main-blue;
+$navbar-light-bg: $main-blue;
+$navbar-light-hover-color:   $light-grey;
+$bg-light: red;
+
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
+.bg-light {
+  background-color:  $main-blue;
+  }
+
+// a{
+//   color:white;
+// }
 h4{
   font-weight: 300;
 }
@@ -26,7 +41,17 @@ body{
 }
 nav{
   background-color: $main-blue;
-  color:white !important;
+  color:white !important;    
+  width: 100vw;
+    display: block;
+    margin: 0;
+    left: 0;
+    position: absolute;
+    top: 0;
+    .menu-item a{
+      color:white!important;
+      text-decoration: none;
+    }
 }
 .navbar-light .navbar-brand {
     color: white;
@@ -39,14 +64,25 @@ nav{
     color: white;
 }
 .navbar-nav{
-  li{
+  a{
     background-color: $main-blue;
     z-index: 1000;
   }
 }
+.navbar-nav.show{
+  a{
+    border-bottom: 0.5px solid white;
+  }
+}
 .navbar-brand{
   background-color: $main-blue;
+  z-index: 1;
+  border-left:0.5px solid white;
+}
+.navbar-toggler{
+  background-color: $main-blue;
   z-index: 1000;
+  border:none;
 }
 
 #navbar-bar{
@@ -56,16 +92,17 @@ nav{
   // display: none;
   position:absolute;
   visibility: hidden;
-  border:solid white 1px;
+  border:solid white 0.5px;
+  z-index: 2;
 }
 
 #derivative-calculator-wrapper {
-  margin: 0;
-  // padding: 5em 3em ;
   text-align: left;
   width:100%;
 }
 #calculator-wrapper{
+
+  // margin: auto;
   width:50%;
   padding: 10px;
   min-width: 375px;
@@ -168,6 +205,7 @@ nav{
     align-items: center;
     text-align: center;
     .about-box-title{
+      cursor: pointer;
       width:25%;
       min-width: 25%;
       text-align: center;
@@ -192,8 +230,13 @@ nav{
       border-top-right-radius: 0;
     }
   }
-}
 
+}
+  @media (max-width: 990px){
+    #about-box{
+      display: none;
+    }
+  }
 
 .mathjax-container{
   overflow-x:scroll;
@@ -229,6 +272,7 @@ nav{
 
 #results-wrapper{
   padding: 10px;
+  margin:auto;
   width:50%;
   text-align: left;
   min-width: 375px;
@@ -261,7 +305,21 @@ nav{
 #quadratic{
   background:white;
 }
+.copy-button{
+  width:30px;
+  height:30px;
+  cursor: pointer;
+  background-color:$main-blue;
+  svg{
+    max-width: 70%;
+    max-height: 70%;
+  }
+  border-radius: $box-border-radius;
+  margin-left:3px;
+  margin-bottom:3px;
+}
 #bottom-ad-space{
+  margin:auto;
   background-color: $light-grey;
   width:70%;
   height:150px;
